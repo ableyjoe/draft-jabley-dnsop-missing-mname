@@ -77,7 +77,7 @@ Updates.
 {::boilerplate bcp14-tagged}
 
 This document assumes familiarity with the terminology of the Domain
-Name System as described in {{!RFC9499}}.
+Name System as described in {{?RFC9499}}.
 
 # Use of the MNAME Field
 
