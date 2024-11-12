@@ -83,13 +83,13 @@ Updates.
 {::boilerplate bcp14-tagged}
 
 This document assumes familiarity with the terminology of the Domain
-Name System as described in {{RFC9499}}.
+Name System as described in {{!RFC9499}}.
 
 # Use of the MNAME Field
 
 The Start of Authority (SOA) Resource Record (RR) is defined in
 {{!RFC1035}}.  The MNAME field of the SOA RDATA is defined in that
-document as "The <domain-name> of the name server that was the
+document as "The &lt;domain-name&gt; of the name server that was the
 original or primary source of data for this zone."
 
 {{!RFC1035}} includes no specific guidance on the use of the MNAME
