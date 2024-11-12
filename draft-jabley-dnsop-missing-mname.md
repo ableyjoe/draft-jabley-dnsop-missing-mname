@@ -19,7 +19,6 @@ v: 3
 area: ops
 workgroup: Network Working Group
 keyword:
- - domain name system
  - dns
  - mname
 venue:
@@ -27,7 +26,6 @@ venue:
   type: Working Group
   mail: dnsop@ietf.org
   github: ableyjoe/draft-jabley-dnsop-missing-mname
-  latest: https://example.com/LATEST
 
 author:
  -
@@ -40,7 +38,6 @@ author:
 normative:
 
 informative:
-
 
 --- abstract
 
