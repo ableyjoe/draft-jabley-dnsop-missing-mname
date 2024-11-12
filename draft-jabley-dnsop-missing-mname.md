@@ -10,16 +10,16 @@ number:
 date:
 consensus: true
 v: 3
-area: ops
-workgroup: Network Working Group
+area: "Operations and Management"
+workgroup: "Domain Name System Operations"
 keyword:
  - dns
  - mname
 venue:
-  group: dnsop
-  type: Working Group
-  mail: dnsop@ietf.org
-  github: ableyjoe/draft-jabley-dnsop-missing-mname
+  group: "Domain Name System Operations"
+  type: "Working Group"
+  mail: "dnsop@ietf.org"
+  github: "ableyjoe/draft-jabley-dnsop-missing-mname"
 
 author:
  -
