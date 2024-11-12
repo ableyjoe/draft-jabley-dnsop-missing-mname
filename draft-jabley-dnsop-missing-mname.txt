@@ -1,0 +1,263 @@
+
+
+
+
+Domain Name System Operations                                   J. Abley
+Internet-Draft                                                Cloudflare
+Intended status: Best Current Practice                  12 November 2024
+Expires: 16 May 2025
+
+
+       Indicating Non-Availability of Dynamic Updates in the DNS
+                draft-jabley-dnsop-missing-mname-latest
+
+Abstract
+
+   The Start of Authority (SOA) Resource Record (RR) in the Domain Name
+   System (DNS) specifies various parameters related to the handling of
+   data in DNS zones.  These parameters are variously used by authority-
+   only servers, caching resolvers and DNS clients to guide them in the
+   way that data contained within particular zones should be used.
+
+   One particular field in the SOA RR is known as MNAME, which is used
+   to specify the "Primary Master" server for a zone.  This is the
+   server to which Dynamic Updates are sent by clients.  Many zones do
+   not accept updates using the Dynamic Update mechanism, and any such
+   DNS UPDATE messages which are received provide no usual purpose.  For
+   such zones it may be preferable not to receive updates from clients
+   at all.
+
+   This document proposes a convention by which a zone operator can
+   signal to clients that a particular zone does not accept Dynamic
+   Updates.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-jabley-dnsop-missing-mname/.
+
+   Discussion of this document takes place on the Domain Name System
+   Operations Working Group mailing list (mailto:dnsop@ietf.org), which
+   is archived at https://mailarchive.ietf.org/arch/browse/dnsop/.
+   Subscribe at https://www.ietf.org/mailman/listinfo/dnsop/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/ableyjoe/draft-jabley-dnsop-missing-mname.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 16 May 2025.
+
+Copyright Notice
+
+   Copyright (c) 2024 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Terminology
+   3.  Use of the MNAME Field
+   4.  Operations
+   5.  Impact on DNS NOTIFY
+   6.  Impact on DNS UPDATE
+   7.  Security Considerations
+   8.  IANA Considerations
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
+   Appendix A.  Change History
+   Acknowledgments
+   Author's Address
+
+1.  Introduction
+
+   [RFC2136] specifies a mechanism for clients to update zones in the
+   DNS dynamically.  This mechanism is widely-deployed by many end-
+   station operating systems, where it is used (for example) to update
+   DNS records in response to a local change of IP address.
+
+   Many zones, however, do not accept dynamic updates from clients as a
+   matter of policy.  For such zones, specifying a DNS server name in
+   the MNAME field of an SOA record has no benefit, and in fact may well
+   cause unwanted traffic (DNS UPDATE messages) to be received by the
+   named server.
+
+   This document proposes a convention by which a zone operator can
+   signal to clients that a particular zone does not accept Dynamic
+   Updates.
+
+2.  Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   This document assumes familiarity with the terminology of the Domain
+   Name System as described in [RFC9499].
+
+3.  Use of the MNAME Field
+
+   The Start of Authority (SOA) Resource Record (RR) is defined in
+   [RFC1035].  The MNAME field of the SOA RDATA is defined in that
+   document as "The <domain-name> of the name server that was the
+   original or primary source of data for this zone."
+
+   [RFC1035] includes no specific guidance on the use of the MNAME
+   field, although the general tone in which SOA RDATA are discussed
+   suggests that its intended purpose was for the management of zone
+   transfers between authority-only servers.  There are no
+   implementations of authority-only servers known to the author which
+   use the MNAME field to manage or perform zone transfers, however; for
+   bootstrapping reasons, commonly-deployed implementations require
+   master servers to be specified explicitly, usually by address rather
+   than name.
+
+   The MNAME field was subsequently referred to in [RFC1996], as part of
+   the definition of the term "Primary Master".  The server specified in
+   the MNAME field was, by default, to be excluded from the set of
+   servers to which DNS NOTIFY messages would be sent.
+
+   In [RFC2136] the MNAME field was again used to provide a definition
+   for the term "Primary Master", in this case for the purpose of
+   identifying the server towards which dynamic updates for that zone
+   should be sent.
+
+   There have been no other references to the use of the MNAME in the
+   RFC series.
+
+   This document specifies a convention by which a zone operator may
+   include an empty MNAME field in order to deliberately specify that
+   there is no appropriate place for Dynamic Updates to be sent.
+
+4.  Operations
+
+   Zone administrators who do not wish to receive Dynamic Updates from
+   clients for a particular zone may specify an empty MNAME field in
+   that zone's SOA RDATA.  The textual representation of an empty field
+   in the canonical representation of zone data is a single ".", as
+   illustrated below.
+
+   @       1800    IN      SOA     jabley.automagic.org. . (
+                                        20080622    ; serial
+                                        1800        ; refresh
+                                        900         ; retry
+                                        10800       ; expire
+                                        1800 )      ; negative cache TTL
+
+   Dynamic Update clients who identify the Primary Master server as the
+   recipient of DNS UPDATE messages from the MNAME field in SOA RDATA
+   SHOULD interpret an empty MNAME field as an indication that no
+   attempt to send a DNS UPDATE message should be made for the zone
+   containing the SOA record.
+
+5.  Impact on DNS NOTIFY
+
+   [RFC1996] specifies that the Primary Server, which is derived from
+   the MNAME field of the SOA RDATA, be excluded from the set of servers
+   to which NOTIFY messages should be sent.
+
+   For zones whose SOA record contains an MNAME field which corresponds
+   to a server listed in the apex NS set, making the MNAME field empty
+   might well cause additional NOTIFY traffic.  If this is a concern,
+   the operators of the authority-only servers for the zone might choose
+   to specify an explicit notify list.
+
+6.  Impact on DNS UPDATE
+
+   The goal of the convention specified in this document is to prevent
+   Dynamic Update clients from sending DNS UPDATE messages for
+   particular zones.  The use of an empty MNAME field is intended to
+   prevent a Dynamic Update client from finding a server to send DNS
+   UPDATE messages to.
+
+7.  Security Considerations
+
+   The convention described in this document provides no additional
+   security risks to DNS zone or server administrators.
+
+   Name servers which do not support Dynamic Updates for the zones they
+   host might experience a security benefit from reduced DNS UPDATE
+   traffic, the absence of that traffic provides additional headroom in
+   network bandwidth and server capacity for legitimate query types.
+
+8.  IANA Considerations
+
+   This document makes no requests of the IANA.
+
+9.  References
+
+9.1.  Normative References
+
+   [RFC1035]  Mockapetris, P., "Domain names - implementation and
+              specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,
+              November 1987, <https://www.rfc-editor.org/rfc/rfc1035>.
+
+   [RFC1996]  Vixie, P., "A Mechanism for Prompt Notification of Zone
+              Changes (DNS NOTIFY)", RFC 1996, DOI 10.17487/RFC1996,
+              August 1996, <https://www.rfc-editor.org/rfc/rfc1996>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC2136]  Vixie, P., Ed., Thomson, S., Rekhter, Y., and J. Bound,
+              "Dynamic Updates in the Domain Name System (DNS UPDATE)",
+              RFC 2136, DOI 10.17487/RFC2136, April 1997,
+              <https://www.rfc-editor.org/rfc/rfc2136>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+9.2.  Informative References
+
+   [RFC9499]  Hoffman, P. and K. Fujiwara, "DNS Terminology", BCP 219,
+              RFC 9499, DOI 10.17487/RFC9499, March 2024,
+              <https://www.rfc-editor.org/rfc/rfc9499>.
+
+Appendix A.  Change History
+
+   This section to be removed prior to publication.
+
+   00 Initial draft, circulated as draft-jabley-dnsop-missing-mname-00
+   in June 2008.
+
+Acknowledgments
+
+   Your name goes here.
+
+Author's Address
+
+   Joe Abley
+   Cloudflare
+   Amsterdam
+   Netherlands
+   Email: jabley@cloudflare.com
