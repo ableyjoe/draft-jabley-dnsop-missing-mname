@@ -125,9 +125,9 @@ Zone administrators who do not wish to receive Dynamic Updates from
 clients for a particular zone may specify an empty MNAME field in
 that zone's SOA RDATA.  The textual representation of an empty field
 in the canonical representation of zone data is a single ".", as
-illustrated in {{soa}}.
+illustrated below.
 
-~~~ {#soa}
+~~~
    @       1800    IN      SOA     jabley.automagic.org. . (
                                         20080622    ; serial
                                         1800        ; refresh
