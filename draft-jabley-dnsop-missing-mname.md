@@ -50,15 +50,16 @@ should be used.
 
 One particular field in the SOA RR is known as MNAME, which is used
 to specify the "Primary Master" server for a zone.  This is the
-server to which Dynamic Updates are sent by clients.  Many zones
-do not accept updates using the Dynamic Update mechanism, and any
+server to which clients use Dynamic Update to send DNS UPDATE
+messages. Many zones do not support the Dynamic Update, and any
 such DNS UPDATE messages which are received provide no usual purpose.
 For such zones it may be preferable not to receive updates from
 clients at all.
 
 This document proposes a convention by which a zone operator can
-signal to clients that a particular zone does not accept Dynamic
-Updates.
+signal to clients that a particular zone does not support Dynamic
+Update.
+
 
 --- middle
 
@@ -78,6 +79,7 @@ This document proposes a convention by which a zone operator can
 signal to clients that a particular zone does not support Dynamic
 Update.
 
+
 # Terminology
 
 {::boilerplate bcp14-tagged}
@@ -95,7 +97,7 @@ particular DNS messages used to make that happen. See {{!RFC2136}}
 for more information about Dynamic Update.
 
 
-# Use of the MNAME Field
+# Use of SOA.MNAME
 
 The Start of Authority (SOA) Resource Record (RR) is defined in
 {{!RFC1035}}.  The MNAME field of the SOA RDATA (SOA.MNAME) is
@@ -131,6 +133,7 @@ there is no appropriate place for Dynamic Update messages to be
 sent, i.e. that the corresponding zone does not support Dynamic
 Update.
 
+
 # Operations
 
 Zone administrators who do not wish to receive Dynamic Update
@@ -157,6 +160,7 @@ that zone.
 Dynamic Update clients SHOULD NOT send DNS UPDATE messages for zones
 whose SOA.NAME is empty.
 
+
 # Impact on DNS NOTIFY
 
 {{!RFC1996}} specifies that the Primary Server, which is derived
@@ -167,14 +171,17 @@ For zones where the value of SOA.MNAME record corresponds to a
 namserver listed in the apex NS RRSet, making the MNAME field empty
 might cause additional DNS NOTIFY traffic, since DNS NOTIFY messages
 that would have been suppressed towards the nameserver published
-as SOA.MNAME will instead be sent. Authoritative DNS infrastructure
-deployed on a scale where high NOTIFY traffic is a concern often
-uses dedicated zone transfer servers, separate from the authoritative
-nameservers intended to receive queries from the Internet, and in
-that situation no additional DNS NOTIFY traffic would be expected.
-However, in other situations, the operators of the authority-only
-servers for the zone might choose to avoid any unwanted NOTIFY
-traffic by using an explicit notify list.
+as SOA.MNAME will instead be sent.
+
+Authoritative DNS infrastructure deployed on a scale where high
+NOTIFY traffic is a concern often uses dedicated zone transfer
+servers, separate from the authoritative nameservers intended to
+receive queries from the Internet, and in that situation no additional
+DNS NOTIFY traffic would be expected.  However, in other situations,
+the operators of the authority-only servers for the zone might
+choose to avoid any unwanted NOTIFY traffic by using an explicit
+notify list.
+
 
 # Impact on DNS UPDATE
 
@@ -183,6 +190,7 @@ Dynamic Update clients from sending DNS UPDATE messages for particular
 zones.  The use of an empty SOA.MNAME is intended to prevent a
 Dynamic Update client from finding a server to send DNS UPDATE
 messages to.
+
 
 # Unintended Consequences
 
@@ -198,6 +206,7 @@ Use of an empty SOA.MNAME is not new; cursory analysis of passive
 DNS data demonstrates a robust volume of DNS responses that include
 an empty SOA.MNAME for zones across a variety of top-level domains.
 See {{quantify}} for discussion.
+
 
 # Security Considerations
 
@@ -215,9 +224,11 @@ Clients that normally send DNS UPDATE messages might see a security
 benefit from not leaking the information contained within those
 messages to nameservers that are not configured to receive them.
 
+
 # IANA Considerations
 
 This document makes no requests of the IANA.
+
 
 --- back
 
@@ -244,6 +255,12 @@ draft.
 # Acknowledgments
 {:numbered="false"}
 
+Various participants in the DNSOP working group provided feedback
+to this idea when it was originally circulated in 2008. The names
+of the people have concerned have long since faded from memory,
+but the authors thank them generally and anonymously, regardless.
+
 Raffaele Sommese helped quantify existing observed use of SOA
 responses with empty MNAME fields in a variety of passive DNS
 datasets, as summarised briefly in {{quantify}}.
+
