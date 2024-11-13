@@ -1249,7 +1249,7 @@ Update.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
                 <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-impact-on-dynamic-update" class="internal xref">Impact on Dynamic Update</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-potential-for-unintended-co" class="internal xref">Potential for Unintended Consequences</a></p>
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-unintended-consequences" class="internal xref">Unintended Consequences</a></p>
 </li>
             </ul>
 </li>
@@ -1458,10 +1458,10 @@ Dynamic Update client from finding a server to send DNS UPDATE
 messages to.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="potential-for-unintended-consequences">
+<div id="unintended-consequences">
 <section id="section-5.3">
-        <h3 id="name-potential-for-unintended-co">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-potential-for-unintended-co" class="section-name selfRef">Potential for Unintended Consequences</a>
+        <h3 id="name-unintended-consequences">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-unintended-consequences" class="section-name selfRef">Unintended Consequences</a>
         </h3>
 <p id="section-5.3-1">Some concern has been raised in the past that an empty SOA.MNAME
 might result in unwanted traffic being sent to root servers, e.g.
@@ -1473,7 +1473,8 @@ this way.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">Use of an empty SOA.MNAME is not new; cursory analysis of passive
 DNS data demonstrates a robust volume of DNS responses that include
 an empty SOA.MNAME for zones across a variety of top-level domains.
-See <a href="#quantify" class="auto internal xref">Appendix A</a> for discussion.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+No negative consequences of this traffic have been identified.  See
+<a href="#quantify" class="auto internal xref">Appendix A</a> for discussion.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

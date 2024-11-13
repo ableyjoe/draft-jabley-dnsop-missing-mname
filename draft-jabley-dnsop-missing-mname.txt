@@ -90,7 +90,7 @@ Table of Contents
    5.  Impact on Deployed Systems and Protocols
      5.1.  Impact on DNS NOTIFY
      5.2.  Impact on Dynamic Update
-     5.3.  Potential for Unintended Consequences
+     5.3.  Unintended Consequences
    6.  Update to RFC 2136
    7.  Security Considerations
    8.  IANA Considerations
@@ -238,7 +238,7 @@ Table of Contents
    prevent a Dynamic Update client from finding a server to send DNS
    UPDATE messages to.
 
-5.3.  Potential for Unintended Consequences
+5.3.  Unintended Consequences
 
    Some concern has been raised in the past that an empty SOA.MNAME
    might result in unwanted traffic being sent to root servers, e.g. for
@@ -250,7 +250,8 @@ Table of Contents
 
    Use of an empty SOA.MNAME is not new; cursory analysis of passive DNS
    data demonstrates a robust volume of DNS responses that include an
-   empty SOA.MNAME for zones across a variety of top-level domains.  See
+   empty SOA.MNAME for zones across a variety of top-level domains.  No
+   negative consequences of this traffic have been identified.  See
    Appendix A for discussion.
 
 6.  Update to RFC 2136
