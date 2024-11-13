@@ -4,8 +4,9 @@
 
 Domain Name System Operations                                   J. Abley
 Internet-Draft                                                Cloudflare
-Intended status: Best Current Practice                  12 November 2024
-Expires: 16 May 2025
+Intended status: Best Current Practice                      P. Thomassen
+Expires: 17 May 2025                   deSEC, Secure Systems Engineering
+                                                        13 November 2024
 
 
        Indicating Non-Availability of Dynamic Updates in the DNS
@@ -61,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 May 2025.
+   This Internet-Draft will expire on 17 May 2025.
 
 Copyright Notice
 
@@ -92,7 +93,7 @@ Table of Contents
      9.2.  Informative References
    Appendix A.  Change History
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -254,10 +255,17 @@ Acknowledgments
 
    Your name goes here.
 
-Author's Address
+Authors' Addresses
 
    Joe Abley
    Cloudflare
    Amsterdam
    Netherlands
    Email: jabley@cloudflare.com
+
+
+   Peter Thomassen
+   deSEC, Secure Systems Engineering
+   Berlin
+   Germany
+   Email: peter@desec.io
