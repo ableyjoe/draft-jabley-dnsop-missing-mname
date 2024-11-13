@@ -127,13 +127,13 @@ that zone's SOA RDATA.  The textual representation of an empty field
 in the canonical representation of zone data is a single ".", as
 illustrated below.
 
-~~~ ascii-art {#soa}
+~~~
    @       1800    IN      SOA     jabley.automagic.org. . (
-                                        20080622    ; serial
-                                        1800        ; refresh
-                                        900         ; retry
-                                        10800       ; expire
-                                        1800 )      ; negative cache TTL
+                                     20080622  ; serial
+                                     1800      ; refresh
+                                     900       ; retry
+                                     10800     ; expire
+                                     1800 )    ; negative cache TTL
 ~~~
 
 Dynamic Update clients who identify the Primary Master server as
@@ -205,7 +205,7 @@ but it perhaps suggests that a study with normalisation and a longer
 time base might be useful to include in a future revision of this
 draft.
 
-|source  |counter |notes                   | {#realworld}
+|source  |counter |notes                   |
 |----    |----    |----                    |
 |com     |109328  |                        |
 |net     |8854    |                        |
