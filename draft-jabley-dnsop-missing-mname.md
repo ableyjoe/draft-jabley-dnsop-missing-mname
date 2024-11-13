@@ -183,7 +183,7 @@ choose to avoid any unwanted NOTIFY traffic by using an explicit
 notify list.
 
 
-# Impact on DNS UPDATE
+# Impact on Dynamic Update
 
 The goal of the convention specified in this document is to prevent
 Dynamic Update clients from sending DNS UPDATE messages for particular
