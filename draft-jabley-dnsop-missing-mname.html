@@ -1224,6 +1224,17 @@ Update.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-operations" class="internal xref">Operations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-dns-implementers" class="internal xref">DNS Implementers</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-zone-administrators" class="internal xref">Zone Administrators</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-dynamic-update-clients" class="internal xref">Dynamic Update Clients</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-impact-on-dns-notify" class="internal xref">Impact on DNS NOTIFY</a></p>
@@ -1342,14 +1353,28 @@ Update.<a href="#section-3-6" class="pilcrow">¶</a></p>
       <h2 id="name-operations">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-operations" class="section-name selfRef">Operations</a>
       </h2>
-<p id="section-4-1">Zone administrators who do not wish to receive Dynamic Update
-messages from clients for a particular zone may specify an empty
+<div id="dns-implementers">
+<section id="section-4.1">
+        <h3 id="name-dns-implementers">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-dns-implementers" class="section-name selfRef">DNS Implementers</a>
+        </h3>
+<p id="section-4.1-1">Implementers of DNS software <span class="bcp14">MUST</span> accept an empty value of SOA.MNAME
+as valid.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="zone-administrators">
+<section id="section-4.2">
+        <h3 id="name-zone-administrators">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-zone-administrators" class="section-name selfRef">Zone Administrators</a>
+        </h3>
+<p id="section-4.2-1">Zone administrators who do not wish to receive Dynamic Update
+messages from clients for a particular zone <span class="bcp14">MAY</span> specify an empty
 SOA.MNAME.  The textual representation of an empty field in the
 canonical representation of zone data is a single ".", as illustrated
-in <a href="#soa" class="auto internal xref">Figure 1</a>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+in <a href="#soa" class="auto internal xref">Figure 1</a>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <span id="name-soa-resource-record-with-em"></span><div id="soa">
 <figure id="figure-1">
-        <div class="alignLeft art-text artwork" id="section-4-2.1">
+          <div class="alignLeft art-text artwork" id="section-4.2-2.1">
 <pre>
 @       1800    IN      SOA     jabley.automagic.org. . (
                                   20080622  ; serial
@@ -1361,14 +1386,23 @@ in <a href="#soa" class="auto internal xref">Figure 1</a>.<a href="#section-4-1"
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-soa-resource-record-with-em" class="selfRef">SOA Resource Record with empty SOA.MNAME</a>
-        </figcaption></figure>
+          </figcaption></figure>
 </div>
-<p id="section-4-3">Dynamic Update clients who identify the recipient of DNS UPDATE
+</section>
+</div>
+<div id="dynamic-update-clients">
+<section id="section-4.3">
+        <h3 id="name-dynamic-update-clients">
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-dynamic-update-clients" class="section-name selfRef">Dynamic Update Clients</a>
+        </h3>
+<p id="section-4.3-1">Dynamic Update clients who identify the recipient of DNS UPDATE
 messages from the value of SOA.MNAME <span class="bcp14">SHOULD</span> interpret an empty
 SOA.MNAME as an indication that Dynamic Updates are unsupported by
-that zone.<a href="#section-4-3" class="pilcrow">¶</a></p>
-<p id="section-4-4">Dynamic Update clients <span class="bcp14">SHOULD NOT</span> send DNS UPDATE messages for zones
-whose SOA.NAME is empty.<a href="#section-4-4" class="pilcrow">¶</a></p>
+that zone.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-2">Dynamic Update clients <span class="bcp14">SHOULD NOT</span> send DNS UPDATE messages for zones
+whose SOA.NAME is empty.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="impact-on-dns-notify">

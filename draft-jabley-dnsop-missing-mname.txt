@@ -84,6 +84,9 @@ Table of Contents
    2.  Terminology
    3.  Use of SOA.MNAME
    4.  Operations
+     4.1.  DNS Implementers
+     4.2.  Zone Administrators
+     4.3.  Dynamic Update Clients
    5.  Impact on DNS NOTIFY
    6.  Impact on Dynamic Update
    7.  Unintended Consequences
@@ -168,8 +171,15 @@ Table of Contents
 
 4.  Operations
 
+4.1.  DNS Implementers
+
+   Implementers of DNS software MUST accept an empty value of SOA.MNAME
+   as valid.
+
+4.2.  Zone Administrators
+
    Zone administrators who do not wish to receive Dynamic Update
-   messages from clients for a particular zone may specify an empty
+   messages from clients for a particular zone MAY specify an empty
    SOA.MNAME.  The textual representation of an empty field in the
    canonical representation of zone data is a single ".", as illustrated
    in Figure 1.
@@ -182,6 +192,8 @@ Table of Contents
                                      1800 )    ; negative cache TTL
 
              Figure 1: SOA Resource Record with empty SOA.MNAME
+
+4.3.  Dynamic Update Clients
 
    Dynamic Update clients who identify the recipient of DNS UPDATE
    messages from the value of SOA.MNAME SHOULD interpret an empty
