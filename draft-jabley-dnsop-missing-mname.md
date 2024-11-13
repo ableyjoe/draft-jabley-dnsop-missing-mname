@@ -208,7 +208,7 @@ Dynamic Update client from finding a server to send DNS UPDATE
 messages to.
 
 
-## Potential for Unintended Consequences
+## Unintended Consequences
 
 Some concern has been raised in the past that an empty SOA.MNAME
 might result in unwanted traffic being sent to root servers, e.g.
@@ -221,7 +221,8 @@ this way.
 Use of an empty SOA.MNAME is not new; cursory analysis of passive
 DNS data demonstrates a robust volume of DNS responses that include
 an empty SOA.MNAME for zones across a variety of top-level domains.
-See {{quantify}} for discussion.
+No negative consequences of this traffic have been identified.  See
+{{quantify}} for discussion.
 
 
 # Update to RFC 2136
