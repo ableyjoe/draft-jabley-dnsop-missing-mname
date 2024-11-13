@@ -28,6 +28,12 @@ author:
     country: Netherlands
     organization: Cloudflare
     email: jabley@cloudflare.com
+ -
+    fullname: Peter Thomassen
+    city: Berlin
+    country: Germany
+    organization: deSEC, Secure Systems Engineering
+    email: peter@desec.io
 
 normative:
 
