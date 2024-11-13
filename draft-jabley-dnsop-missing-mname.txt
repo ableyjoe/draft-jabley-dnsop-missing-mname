@@ -268,7 +268,7 @@ Appendix A.  Observed Use of Empty MNAME fields in SOA Responses
    observed traffic on 2024-10-30 reveals asome volume of examples in
    the real world.  This data is not intended to say more than that, but
    it perhaps suggests that a study with normalisation and a longer time
-   base might be useful to include.
+   base might be useful to include in a future revision of this draft.
 
                +========+=========+=======================+
                | source | counter | notes                 |
@@ -283,7 +283,7 @@ Appendix A.  Observed Use of Empty MNAME fields in SOA Responses
                +--------+---------+-----------------------+
                | imp    | 634     | old gTLDs e.g. aero   |
                +--------+---------+-----------------------+
-               | opencc | 111     | see openintel webiste |
+               | opencc | 111     | see openintel website |
                +--------+---------+-----------------------+
 
                                  Table 1
