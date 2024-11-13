@@ -1252,7 +1252,7 @@ Updates.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-observed-use-of-empty-mname" class="internal xref">Observed Use of Empty MNAME fields in SOA Responses</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-empty-soamname-observed-in-" class="internal xref">Empty SOA.MNAME Observed in SOA Responses</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
             <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
@@ -1337,16 +1337,22 @@ there is no appropriate place for Dynamic Updates to be sent.<a href="#section-3
 clients for a particular zone may specify an empty MNAME field in
 that zone's SOA RDATA.  The textual representation of an empty field
 in the canonical representation of zone data is a single ".", as
-illustrated below.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-4-2">
+illustrated in <a href="#soa" class="auto internal xref">Figure 1</a>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<span id="name-soa-resource-record-with-em"></span><div id="soa">
+<figure id="figure-1">
+        <div class="alignLeft art-text artwork" id="section-4-2.1">
 <pre>
-   @       1800    IN      SOA     jabley.automagic.org. . (
-                                     20080622  ; serial
-                                     1800      ; refresh
-                                     900       ; retry
-                                     10800     ; expire
-                                     1800 )    ; negative cache TTL
-</pre><a href="#section-4-2" class="pilcrow">¶</a>
+@       1800    IN      SOA     jabley.automagic.org. . (
+                                  20080622  ; serial
+                                  1800      ; refresh
+                                  900       ; retry
+                                  10800     ; expire
+                                  1800 )    ; negative cache TTL
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-soa-resource-record-with-em" class="selfRef">SOA Resource Record with empty MNAME</a>
+        </figcaption></figure>
 </div>
 <p id="section-4-3">Dynamic Update clients who identify the Primary Master server as
 the recipient of DNS UPDATE messages from the MNAME field in SOA
@@ -1474,17 +1480,21 @@ messages to nameservers that are not configured to receive them.<a href="#sectio
 </div>
 <div id="quantify">
 <section id="appendix-A">
-      <h2 id="name-observed-use-of-empty-mname">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-observed-use-of-empty-mname" class="section-name selfRef">Observed Use of Empty MNAME fields in SOA Responses</a>
+      <h2 id="name-empty-soamname-observed-in-">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-empty-soamname-observed-in-" class="section-name selfRef">Empty SOA.MNAME Observed in SOA Responses</a>
       </h2>
 <p id="appendix-A-1">A quick check using a variety of passive DNS datasets relating to
-observed traffic on 2024-10-30 reveals asome volume of examples in
-the real world. This data is not intended to say more than that,
-but it perhaps suggests that a study with normalisation and a longer
+observed traffic on 2024-10-30 reveals examples of responses with
+empty SOA.MNAME in the real world, as illustrated in <a href="#realworld" class="auto internal xref">Table 1</a>.
+This perhaps suggests that a study with normalisation and a longer
 time base might be useful to include in a future revision of this
 draft.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<span id="name-dns-responses-observed-with"></span><div id="realworld">
 <table class="center" id="table-1">
-        <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
+        <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-dns-responses-observed-with" class="selfRef">DNS Responses Observed with EMPTY SOA.MNAME</a>
+        </caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">source</th>
@@ -1525,6 +1535,7 @@ draft.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
           </tr>
         </tbody>
       </table>
+</div>
 </section>
 </div>
 <div id="acknowledgments">
