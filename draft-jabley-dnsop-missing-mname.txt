@@ -166,12 +166,9 @@ Table of Contents
    in the canonical representation of zone data is a single ".", as
    illustrated below.
 
-   @       1800    IN      SOA     jabley.automagic.org. . (
-                                        20080622    ; serial
-                                        1800        ; refresh
-                                        900         ; retry
-                                        10800       ; expire
-                                        1800 )      ; negative cache TTL
+   ~~~ ascii-art {#soa} @ 1800 IN SOA jabley.automagic.org. . ( 20080622
+   ; serial 1800 ; refresh 900 ; retry 10800 ; expire 1800 ) ; negative
+   cache TTL ~~~
 
    Dynamic Update clients who identify the Primary Master server as the
    recipient of DNS UPDATE messages from the MNAME field in SOA RDATA
@@ -270,23 +267,23 @@ Appendix A.  Observed Use of Empty MNAME fields in SOA Responses
    it perhaps suggests that a study with normalisation and a longer time
    base might be useful to include in a future revision of this draft.
 
-               +========+=========+=======================+
-               | source | counter | notes                 |
-               +========+=========+=======================+
-               | com    | 109328  |                       |
-               +--------+---------+-----------------------+
-               | net    | 8854    |                       |
-               +--------+---------+-----------------------+
-               | org    | 1792    |                       |
-               +--------+---------+-----------------------+
-               | czds   | 964     |                       |
-               +--------+---------+-----------------------+
-               | imp    | 634     | old gTLDs e.g. aero   |
-               +--------+---------+-----------------------+
-               | opencc | 111     | see openintel website |
-               +--------+---------+-----------------------+
+        +========+=========+=======================+==============+
+        | source | counter | notes                 | {#realworld} |
+        +========+=========+=======================+==============+
+        | com    | 109328  |                       |              |
+        +--------+---------+-----------------------+--------------+
+        | net    | 8854    |                       |              |
+        +--------+---------+-----------------------+--------------+
+        | org    | 1792    |                       |              |
+        +--------+---------+-----------------------+--------------+
+        | czds   | 964     |                       |              |
+        +--------+---------+-----------------------+--------------+
+        | imp    | 634     | old gTLDs e.g. aero   |              |
+        +--------+---------+-----------------------+--------------+
+        | opencc | 111     | see openintel website |              |
+        +--------+---------+-----------------------+--------------+
 
-                                 Table 1
+                                  Table 1
 
 Acknowledgments
 
