@@ -91,7 +91,6 @@ Table of Contents
    9.  References
      9.1.  Normative References
      9.2.  Informative References
-   Appendix A.  Change History
    Acknowledgments
    Authors' Addresses
 
@@ -243,13 +242,6 @@ Table of Contents
    [RFC9499]  Hoffman, P. and K. Fujiwara, "DNS Terminology", BCP 219,
               RFC 9499, DOI 10.17487/RFC9499, March 2024,
               <https://www.rfc-editor.org/rfc/rfc9499>.
-
-Appendix A.  Change History
-
-   This section to be removed prior to publication.
-
-   00 Initial draft, circulated as draft-jabley-dnsop-missing-mname-00
-   in June 2008.
 
 Acknowledgments
 
