@@ -2,10 +2,11 @@
 
 title: "Indicating Non-Availability of Dynamic Updates in the DNS"
 abbrev: "Non-Availability of Dynamic Updates"
-category: bcp
+category: std
+updates: 2136
 
 docname: draft-jabley-dnsop-missing-mname-latest
-submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
+submissiontype: IETF
 number:
 date:
 consensus: true
@@ -136,10 +137,12 @@ Update.
 
 # Operations
 
-## DNS Implementers
+## DNS Software
 
-Implementers of DNS software MUST accept an empty value of SOA.MNAME
-as valid.
+DNS software MUST accept an empty value of SOA.MNAME as valid.  This
+includes software that consumes, generates, collects, manages and
+validates DNS messages and software that provides related provisioning
+and user interfaces for zone administrators.
 
 
 ## Zone Administrators
@@ -172,7 +175,9 @@ Dynamic Update clients SHOULD NOT send DNS UPDATE messages for zones
 whose SOA.NAME is empty.
 
 
-# Impact on DNS NOTIFY
+# Impact on Deployed Systems and Protocols
+
+## Impact on DNS NOTIFY
 
 {{!RFC1996}} specifies that the Primary Server, which is derived
 from SOA.MNAME, be excluded from the set of servers to which NOTIFY
@@ -194,7 +199,7 @@ choose to avoid any unwanted NOTIFY traffic by using an explicit
 notify list.
 
 
-# Impact on Dynamic Update
+## Impact on Dynamic Update
 
 The goal of the convention specified in this document is to prevent
 Dynamic Update clients from sending DNS UPDATE messages for particular
@@ -203,7 +208,7 @@ Dynamic Update client from finding a server to send DNS UPDATE
 messages to.
 
 
-# Unintended Consequences
+## Potential for Unintended Consequences
 
 Some concern has been raised in the past that an empty SOA.MNAME
 might result in unwanted traffic being sent to root servers, e.g.
@@ -217,6 +222,13 @@ Use of an empty SOA.MNAME is not new; cursory analysis of passive
 DNS data demonstrates a robust volume of DNS responses that include
 an empty SOA.MNAME for zones across a variety of top-level domains.
 See {{quantify}} for discussion.
+
+
+# Update to RFC 2136
+
+{{!RFC2136}} is updated to reflect the interpretation of an empty
+SOA.MNAME as meaning that the enclosing zone does not support Dynamic
+Update.
 
 
 # Security Considerations
