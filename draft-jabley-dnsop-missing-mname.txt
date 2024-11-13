@@ -85,7 +85,7 @@ Table of Contents
    3.  Use of SOA.MNAME
    4.  Operations
    5.  Impact on DNS NOTIFY
-   6.  Impact on DNS UPDATE
+   6.  Impact on Dynamic Update
    7.  Unintended Consequences
    8.  Security Considerations
    9.  IANA Considerations
@@ -212,7 +212,7 @@ Table of Contents
    might choose to avoid any unwanted NOTIFY traffic by using an
    explicit notify list.
 
-6.  Impact on DNS UPDATE
+6.  Impact on Dynamic Update
 
    The goal of the convention specified in this document is to prevent
    Dynamic Update clients from sending DNS UPDATE messages for
