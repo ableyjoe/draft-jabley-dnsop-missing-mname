@@ -16,14 +16,14 @@ guide them in the way that data contained within particular zones
 should be used. 
        One particular field in the SOA RR is known as MNAME, which is used
 to specify the "Primary Master" server for a zone.  This is the
-server to which Dynamic Updates are sent by clients.  Many zones
-do not accept updates using the Dynamic Update mechanism, and any
+server to which clients use Dynamic Update to send DNS UPDATE
+messages. Many zones do not support the Dynamic Update, and any
 such DNS UPDATE messages which are received provide no usual purpose.
 For such zones it may be preferable not to receive updates from
 clients at all. 
        This document proposes a convention by which a zone operator can
-signal to clients that a particular zone does not accept Dynamic
-Updates. 
+signal to clients that a particular zone does not support Dynamic
+Update. 
     ' name="description">
 <meta content="xml2rfc 3.24.0" name="generator">
 <meta content="dns" name="keyword">
@@ -1141,14 +1141,14 @@ guide them in the way that data contained within particular zones
 should be used.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">One particular field in the SOA RR is known as MNAME, which is used
 to specify the "Primary Master" server for a zone.  This is the
-server to which Dynamic Updates are sent by clients.  Many zones
-do not accept updates using the Dynamic Update mechanism, and any
+server to which clients use Dynamic Update to send DNS UPDATE
+messages. Many zones do not support the Dynamic Update, and any
 such DNS UPDATE messages which are received provide no usual purpose.
 For such zones it may be preferable not to receive updates from
 clients at all.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 <p id="section-abstract-3">This document proposes a convention by which a zone operator can
-signal to clients that a particular zone does not accept Dynamic
-Updates.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
+signal to clients that a particular zone does not support Dynamic
+Update.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1220,7 +1220,7 @@ Updates.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-use-of-the-mname-field" class="internal xref">Use of the MNAME Field</a></p>
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-use-of-soamname" class="internal xref">Use of SOA.MNAME</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-operations" class="internal xref">Operations</a></p>
@@ -1302,10 +1302,10 @@ particular DNS messages used to make that happen. See <span>[<a href="#RFC2136" 
 for more information about Dynamic Update.<a href="#section-2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="use-of-the-mname-field">
+<div id="use-of-soamname">
 <section id="section-3">
-      <h2 id="name-use-of-the-mname-field">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-use-of-the-mname-field" class="section-name selfRef">Use of the MNAME Field</a>
+      <h2 id="name-use-of-soamname">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-use-of-soamname" class="section-name selfRef">Use of SOA.MNAME</a>
       </h2>
 <p id="section-3-1">The Start of Authority (SOA) Resource Record (RR) is defined in
 <span>[<a href="#RFC1035" class="cite xref">RFC1035</a>]</span>.  The MNAME field of the SOA RDATA (SOA.MNAME) is
@@ -1383,14 +1383,15 @@ messages should be sent.<a href="#section-5-1" class="pilcrow">¶</a></p>
 namserver listed in the apex NS RRSet, making the MNAME field empty
 might cause additional DNS NOTIFY traffic, since DNS NOTIFY messages
 that would have been suppressed towards the nameserver published
-as SOA.MNAME will instead be sent. Authoritative DNS infrastructure
-deployed on a scale where high NOTIFY traffic is a concern often
-uses dedicated zone transfer servers, separate from the authoritative
-nameservers intended to receive queries from the Internet, and in
-that situation no additional DNS NOTIFY traffic would be expected.
-However, in other situations, the operators of the authority-only
-servers for the zone might choose to avoid any unwanted NOTIFY
-traffic by using an explicit notify list.<a href="#section-5-2" class="pilcrow">¶</a></p>
+as SOA.MNAME will instead be sent.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">Authoritative DNS infrastructure deployed on a scale where high
+NOTIFY traffic is a concern often uses dedicated zone transfer
+servers, separate from the authoritative nameservers intended to
+receive queries from the Internet, and in that situation no additional
+DNS NOTIFY traffic would be expected.  However, in other situations,
+the operators of the authority-only servers for the zone might
+choose to avoid any unwanted NOTIFY traffic by using an explicit
+notify list.<a href="#section-5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="impact-on-dns-update">
@@ -1563,9 +1564,13 @@ draft.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-B-1">Raffaele Sommese helped quantify existing observed use of SOA
+<p id="appendix-B-1">Various participants in the DNSOP working group provided feedback
+to this idea when it was originally circulated in 2008. The names
+of the people have concerned have long since faded from memory,
+but the authors thank them generally and anonymously, regardless.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">Raffaele Sommese helped quantify existing observed use of SOA
 responses with empty MNAME fields in a variety of passive DNS
-datasets, as summarised briefly in <a href="#quantify" class="auto internal xref">Appendix A</a>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+datasets, as summarised briefly in <a href="#quantify" class="auto internal xref">Appendix A</a>.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">

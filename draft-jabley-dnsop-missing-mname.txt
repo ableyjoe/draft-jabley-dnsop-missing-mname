@@ -22,15 +22,15 @@ Abstract
 
    One particular field in the SOA RR is known as MNAME, which is used
    to specify the "Primary Master" server for a zone.  This is the
-   server to which Dynamic Updates are sent by clients.  Many zones do
-   not accept updates using the Dynamic Update mechanism, and any such
+   server to which clients use Dynamic Update to send DNS UPDATE
+   messages.  Many zones do not support the Dynamic Update, and any such
    DNS UPDATE messages which are received provide no usual purpose.  For
    such zones it may be preferable not to receive updates from clients
    at all.
 
    This document proposes a convention by which a zone operator can
-   signal to clients that a particular zone does not accept Dynamic
-   Updates.
+   signal to clients that a particular zone does not support Dynamic
+   Update.
 
 About This Document
 
@@ -82,7 +82,7 @@ Table of Contents
 
    1.  Introduction
    2.  Terminology
-   3.  Use of the MNAME Field
+   3.  Use of SOA.MNAME
    4.  Operations
    5.  Impact on DNS NOTIFY
    6.  Impact on DNS UPDATE
@@ -132,7 +132,7 @@ Table of Contents
    particular DNS messages used to make that happen.  See [RFC2136] for
    more information about Dynamic Update.
 
-3.  Use of the MNAME Field
+3.  Use of SOA.MNAME
 
    The Start of Authority (SOA) Resource Record (RR) is defined in
    [RFC1035].  The MNAME field of the SOA RDATA (SOA.MNAME) is defined
@@ -201,14 +201,16 @@ Table of Contents
    namserver listed in the apex NS RRSet, making the MNAME field empty
    might cause additional DNS NOTIFY traffic, since DNS NOTIFY messages
    that would have been suppressed towards the nameserver published as
-   SOA.MNAME will instead be sent.  Authoritative DNS infrastructure
-   deployed on a scale where high NOTIFY traffic is a concern often uses
-   dedicated zone transfer servers, separate from the authoritative
-   nameservers intended to receive queries from the Internet, and in
-   that situation no additional DNS NOTIFY traffic would be expected.
-   However, in other situations, the operators of the authority-only
-   servers for the zone might choose to avoid any unwanted NOTIFY
-   traffic by using an explicit notify list.
+   SOA.MNAME will instead be sent.
+
+   Authoritative DNS infrastructure deployed on a scale where high
+   NOTIFY traffic is a concern often uses dedicated zone transfer
+   servers, separate from the authoritative nameservers intended to
+   receive queries from the Internet, and in that situation no
+   additional DNS NOTIFY traffic would be expected.  However, in other
+   situations, the operators of the authority-only servers for the zone
+   might choose to avoid any unwanted NOTIFY traffic by using an
+   explicit notify list.
 
 6.  Impact on DNS UPDATE
 
@@ -313,6 +315,11 @@ Appendix A.  Empty SOA.MNAME Observed in SOA Responses
                              empty SOA.MNAME
 
 Acknowledgments
+
+   Various participants in the DNSOP working group provided feedback to
+   this idea when it was originally circulated in 2008.  The names of
+   the people have concerned have long since faded from memory, but the
+   authors thank them generally and anonymously, regardless.
 
    Raffaele Sommese helped quantify existing observed use of SOA
    responses with empty MNAME fields in a variety of passive DNS
