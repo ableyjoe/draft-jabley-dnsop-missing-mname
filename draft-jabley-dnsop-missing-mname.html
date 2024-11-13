@@ -1230,27 +1230,33 @@ Updates.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-impact-on-dns-update" class="internal xref">Impact on DNS UPDATE</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-unintended-consequences" class="internal xref">Unintended Consequences</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-observed-use-of-empty-mname" class="internal xref">Observed Use of Empty MNAME fields in SOA Responses</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1375,36 +1381,55 @@ prevent a Dynamic Update client from finding a server to send DNS
 UPDATE messages to.<a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="security-considerations">
+<div id="unintended-consequences">
 <section id="section-7">
-      <h2 id="name-security-considerations">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      <h2 id="name-unintended-consequences">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-unintended-consequences" class="section-name selfRef">Unintended Consequences</a>
       </h2>
-<p id="section-7-1">The convention described in this document provides no additional
-security risks to DNS zone or server administrators.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">Name servers which do not support Dynamic Updates for the zones they
+<p id="section-7-1">Some concern has been raised in the past that an empty MNAME field
+might result in unwanted traffic being sent to root servers, e.g.
+for clients that interpret the MNAME as a zone name rather than a
+hostname and direct traffic towards the root zone's nameservers.
+However, no examples of this behaviour have been identified.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">Use of an empty MNAME field is not new; cursory analysis of passive DNS
+data demonstrates a robust volume of DNS responses with QTYPE=SOA
+and empty SOA.MNAME for zones across a variety of top-level
+domains. See <a href="#quantify" class="auto internal xref">Appendix A</a> for discussion.<a href="#section-7-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-8">
+      <h2 id="name-security-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-8-1">The convention described in this document provides no additional
+security risks to DNS zone or server administrators.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">Name servers which do not support Dynamic Updates for the zones they
 host might experience a security benefit from reduced DNS UPDATE
 traffic, the absence of that traffic provides additional headroom in
-network bandwidth and server capacity for legitimate query types.<a href="#section-7-2" class="pilcrow">¶</a></p>
+network bandwidth and server capacity for legitimate query types.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-3">Clients that normally send DNS UPDATE messages might see a security
+benefit from not leaking the information contained within those
+messages to nameservers that are not configured to receive them.<a href="#section-8-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-8">
+<section id="section-9">
       <h2 id="name-iana-considerations">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-8-1">This document makes no requests of the IANA.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">This document makes no requests of the IANA.<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-9">
+<section id="section-10">
       <h2 id="name-references">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-9.1">
+<section id="section-10.1">
         <h3 id="name-normative-references">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="RFC1035">[RFC1035]</dt>
@@ -1431,9 +1456,9 @@ network bandwidth and server capacity for legitimate query types.<a href="#secti
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-9.2">
+<section id="section-10.2">
         <h3 id="name-informative-references">
-<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="RFC9499">[RFC9499]</dt>
@@ -1445,16 +1470,73 @@ network bandwidth and server capacity for legitimate query types.<a href="#secti
 </div>
 </section>
 </div>
-<div id="acknowledgments">
+<div id="quantify">
 <section id="appendix-A">
+      <h2 id="name-observed-use-of-empty-mname">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-observed-use-of-empty-mname" class="section-name selfRef">Observed Use of Empty MNAME fields in SOA Responses</a>
+      </h2>
+<p id="appendix-A-1">A quick check using a variety of passive DNS datasets relating to
+observed traffic on 2024-10-30 reveals asome volume of
+examples in the real world. This data is not intended to say more
+than that, but it perhaps suggests that a study with normalisation
+and a longer
+time base might be useful to include.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<table class="center" id="table-1">
+        <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">source</th>
+            <th class="text-left" rowspan="1" colspan="1">counter</th>
+            <th class="text-left" rowspan="1" colspan="1">notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">com</td>
+            <td class="text-left" rowspan="1" colspan="1">109328</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">net</td>
+            <td class="text-left" rowspan="1" colspan="1">8854</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">org</td>
+            <td class="text-left" rowspan="1" colspan="1">1792</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">czds</td>
+            <td class="text-left" rowspan="1" colspan="1">964</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">imp</td>
+            <td class="text-left" rowspan="1" colspan="1">634</td>
+            <td class="text-left" rowspan="1" colspan="1">old gTLDs e.g. aero</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">opencc</td>
+            <td class="text-left" rowspan="1" colspan="1">111</td>
+            <td class="text-left" rowspan="1" colspan="1">see openintel webiste</td>
+          </tr>
+        </tbody>
+      </table>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-B">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">Your name goes here.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-1">Raffaele Sommese helped quantify existing observed use of SOA
+responses with empty MNAME fields in a variety of passive DNS
+datasets, as summarised briefly in <a href="#quantify" class="auto internal xref">Appendix A</a>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-B">
+<section id="appendix-C">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>

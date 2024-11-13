@@ -86,11 +86,13 @@ Table of Contents
    4.  Operations
    5.  Impact on DNS NOTIFY
    6.  Impact on DNS UPDATE
-   7.  Security Considerations
-   8.  IANA Considerations
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   7.  Unintended Consequences
+   8.  Security Considerations
+   9.  IANA Considerations
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
+   Appendix A.  Observed Use of Empty MNAME fields in SOA Responses
    Acknowledgments
    Authors' Addresses
 
@@ -197,7 +199,20 @@ Table of Contents
    prevent a Dynamic Update client from finding a server to send DNS
    UPDATE messages to.
 
-7.  Security Considerations
+7.  Unintended Consequences
+
+   Some concern has been raised in the past that an empty MNAME field
+   might result in unwanted traffic being sent to root servers, e.g. for
+   clients that interpret the MNAME as a zone name rather than a
+   hostname and direct traffic towards the root zone's nameservers.
+   However, no examples of this behaviour have been identified.
+
+   Use of an empty MNAME field is not new; cursory analysis of passive
+   DNS data demonstrates a robust volume of DNS responses with QTYPE=SOA
+   and empty SOA.MNAME for zones across a variety of top-level domains.
+   See Appendix A for discussion.
+
+8.  Security Considerations
 
    The convention described in this document provides no additional
    security risks to DNS zone or server administrators.
@@ -207,13 +222,17 @@ Table of Contents
    traffic, the absence of that traffic provides additional headroom in
    network bandwidth and server capacity for legitimate query types.
 
-8.  IANA Considerations
+   Clients that normally send DNS UPDATE messages might see a security
+   benefit from not leaking the information contained within those
+   messages to nameservers that are not configured to receive them.
+
+9.  IANA Considerations
 
    This document makes no requests of the IANA.
 
-9.  References
+10.  References
 
-9.1.  Normative References
+10.1.  Normative References
 
    [RFC1035]  Mockapetris, P., "Domain names - implementation and
               specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,
@@ -237,15 +256,43 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-9.2.  Informative References
+10.2.  Informative References
 
    [RFC9499]  Hoffman, P. and K. Fujiwara, "DNS Terminology", BCP 219,
               RFC 9499, DOI 10.17487/RFC9499, March 2024,
               <https://www.rfc-editor.org/rfc/rfc9499>.
 
+Appendix A.  Observed Use of Empty MNAME fields in SOA Responses
+
+   A quick check using a variety of passive DNS datasets relating to
+   observed traffic on 2024-10-30 reveals asome volume of examples in
+   the real world.  This data is not intended to say more than that, but
+   it perhaps suggests that a study with normalisation and a longer time
+   base might be useful to include.
+
+               +========+=========+=======================+
+               | source | counter | notes                 |
+               +========+=========+=======================+
+               | com    | 109328  |                       |
+               +--------+---------+-----------------------+
+               | net    | 8854    |                       |
+               +--------+---------+-----------------------+
+               | org    | 1792    |                       |
+               +--------+---------+-----------------------+
+               | czds   | 964     |                       |
+               +--------+---------+-----------------------+
+               | imp    | 634     | old gTLDs e.g. aero   |
+               +--------+---------+-----------------------+
+               | opencc | 111     | see openintel webiste |
+               +--------+---------+-----------------------+
+
+                                 Table 1
+
 Acknowledgments
 
-   Your name goes here.
+   Raffaele Sommese helped quantify existing observed use of SOA
+   responses with empty MNAME fields in a variety of passive DNS
+   datasets, as summarised briefly in Appendix A.
 
 Authors' Addresses
 
