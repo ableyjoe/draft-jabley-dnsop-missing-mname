@@ -162,6 +162,19 @@ particular zones.  The use of an empty MNAME field is intended to
 prevent a Dynamic Update client from finding a server to send DNS
 UPDATE messages to.
 
+# Unintended Consequences
+
+Some concern has been raised in the past that an empty MNAME field
+might result in unwanted traffic being sent to root servers, e.g.
+for clients that interpret the MNAME as a zone name rather than a
+hostname and direct traffic towards the root zone's nameservers.
+However, no examples of this behaviour have been identified.
+
+Use of an empty MNAME field is not new; cursory analysis of passive DNS
+data demonstrates a robust volume of DNS responses with QTYPE=SOA
+and empty SOA.MNAME for zones across a variety of top-level
+domains. See {{quantify}} for discussion.
+
 # Security Considerations
 
 The convention described in this document provides no additional
@@ -172,13 +185,38 @@ host might experience a security benefit from reduced DNS UPDATE
 traffic, the absence of that traffic provides additional headroom in
 network bandwidth and server capacity for legitimate query types.
 
+Clients that normally send DNS UPDATE messages might see a security
+benefit from not leaking the information contained within those
+messages to nameservers that are not configured to receive them.
+
 # IANA Considerations
 
 This document makes no requests of the IANA.
 
 --- back
 
+# Observed Use of Empty MNAME fields in SOA Responses {#quantify}
+
+A quick check using a variety of passive DNS datasets relating to
+observed traffic on 2024-10-30 reveals asome volume of
+examples in the real world. This data is not intended to say more
+than that, but it perhaps suggests that a study with normalisation
+and a longer
+time base might be useful to include.
+
+|source  |counter |notes  |
+|----    |----    |----   |
+|com     |109328 | |
+|net     |8854   | |
+|org     |1792   | |
+|czds    |964    | |
+|imp     |634    | old gTLDs e.g. aero  |
+|opencc  |111    | see openintel webiste  |
+
+
 # Acknowledgments
 {:numbered="false"}
 
-Your name goes here.
+Raffaele Sommese helped quantify existing observed use of SOA
+responses with empty MNAME fields in a variety of passive DNS
+datasets, as summarised briefly in {{quantify}}.
