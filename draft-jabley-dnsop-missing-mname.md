@@ -42,9 +42,9 @@ informative:
 --- abstract
 
 The Start of Authority (SOA) Resource Record (RR) in the Domain
-Name System (DNS) specifies various parameters related to the
+Name System (DNS) includes various parameters related to the
 handling of data in DNS zones.  These parameters are variously used
-by authority- only servers, caching resolvers and DNS clients to
+by authority-only servers, caching resolvers and DNS clients to
 guide them in the way that data contained within particular zones
 should be used.
 
@@ -65,19 +65,18 @@ Updates.
 # Introduction
 
 {{!RFC2136}} specifies a mechanism for clients to update zones in
-the DNS dynamically.  This mechanism is widely-deployed by many
-end-station operating systems, where it is used (for example) to
-update DNS records in response to a local change of IP address.
+the DNS dynamically. This Dynamic Update mechanism is widely-deployed
+and is used, for example, to update DNS records in response to a
+local change of IP address.
 
-Many zones, however, do not accept dynamic updates from clients as
-a matter of policy.  For such zones, specifying a DNS server name
-in the MNAME field of an SOA record has no benefit, and in fact may
-well cause unwanted traffic (DNS UPDATE messages) to be received
-by the named server.
+Many zones, however, do not support Dynamic Update as a matter of
+policy.  For such zones, specifying a DNS server name in the MNAME
+field of an SOA record has no benefit, and in fact may well cause
+unwanted DNS UPDATE traffic to be received by the named server.
 
 This document proposes a convention by which a zone operator can
-signal to clients that a particular zone does not accept Dynamic
-Updates.
+signal to clients that a particular zone does not support Dynamic
+Update.
 
 # Terminology
 
@@ -86,46 +85,59 @@ Updates.
 This document assumes familiarity with the terminology of the Domain
 Name System as described in {{?RFC9499}}.
 
+This document uses the abbreviation SOA.MNAME to mean the MNAME field
+of the RDATA of an SOA Resource Record.
+
+This document uses the phrase "Dynamic Update" to describe the
+general facility used by clients to request changes to DNS data
+published by authority servers, and "DNS UPDATE" to refer to the
+particular DNS messages used to make that happen. See {{!RFC2136}}
+for more information about Dynamic Update.
+
+
 # Use of the MNAME Field
 
 The Start of Authority (SOA) Resource Record (RR) is defined in
-{{!RFC1035}}.  The MNAME field of the SOA RDATA is defined in that
-document as "The &lt;domain-name&gt; of the name server that was
-the original or primary source of data for this zone."
+{{!RFC1035}}.  The MNAME field of the SOA RDATA (SOA.MNAME) is
+defined in that document as "The &lt;domain-name&gt; of the name
+server that was the original or primary source of data for this
+zone."
 
-{{!RFC1035}} includes no specific guidance on the use of the MNAME
-field, although the general tone in which SOA RDATA are discussed
-suggests that its intended purpose was for the management of zone
-transfers between authority-only servers.  There are no implementations
-of authority-only servers known to the author which use the MNAME
-field to manage or perform zone transfers, however; for bootstrapping
+{{!RFC1035}} includes no specific guidance on the use of SOA.MNAME,
+although the general tone in which SOA RDATA are discussed suggests
+that its intended purpose was for the management of zone transfers
+between authority-only servers.  There are no known implementations
+of authority-only servers known to the author which use SOA.MNAME
+to manage or perform zone transfers, however; for bootstrapping
 reasons, commonly-deployed implementations require master servers
 to be specified explicitly, usually by address rather than name.
 
-The MNAME field was subsequently referred to in {{!RFC1996}}, as
-part of the definition of the term "Primary Master".  The server
-specified in the MNAME field was, by default, to be excluded from
-the set of servers to which DNS NOTIFY messages would be sent.
+SOA.MNAME was subsequently referred to in {{!RFC1996}} as part of
+the definition of the term "Primary Master".  The server specified
+in SOA.MNAME was, by default, to be excluded from the set of servers
+to which DNS NOTIFY messages would be sent.
 
-In {{!RFC2136}} the MNAME field was again used to provide a definition
-for the term "Primary Master", in this case for the purpose of
-identifying the server towards which dynamic updates for that zone
-should be sent.
+In {{!RFC2136}} SOA.MNAME was again used to provide a definition
+of the term "Primary Master", in this case for the purpose of
+identifying the server towards which DNS UPDATE messages relating
+to that zone should be sent.
 
-There have been no other references to the use of the MNAME in the
+There have been no other references to the use of SOA.MNAME in the
 RFC series.
 
 This document specifies a convention by which a zone operator may
-include an empty MNAME field in order to deliberately specify that
-there is no appropriate place for Dynamic Updates to be sent.
+include an empty SOA.MNAME in order to deliberately specify that
+there is no appropriate place for Dynamic Update messages to be
+sent, i.e. that the corresponding zone does not support Dynamic
+Update.
 
 # Operations
 
-Zone administrators who do not wish to receive Dynamic Updates from
-clients for a particular zone may specify an empty MNAME field in
-that zone's SOA RDATA.  The textual representation of an empty field
-in the canonical representation of zone data is a single ".", as
-illustrated in {{soa}}.
+Zone administrators who do not wish to receive Dynamic Update
+messages from clients for a particular zone may specify an empty
+SOA.MNAME.  The textual representation of an empty field in the
+canonical representation of zone data is a single ".", as illustrated
+in {{soa}}.
 
 ~~~
 @       1800    IN      SOA     jabley.automagic.org. . (
@@ -135,45 +147,56 @@ illustrated in {{soa}}.
                                   10800     ; expire
                                   1800 )    ; negative cache TTL
 ~~~
-{: #soa title="SOA Resource Record with empty MNAME"}
+{: #soa title="SOA Resource Record with empty SOA.MNAME"}
 
-Dynamic Update clients who identify the Primary Master server as
-the recipient of DNS UPDATE messages from the MNAME field in SOA
-RDATA SHOULD interpret an empty MNAME field as an indication that
-no attempt to send a DNS UPDATE message should be made for the zone
-containing the SOA record.
+Dynamic Update clients who identify the recipient of DNS UPDATE
+messages from the value of SOA.MNAME SHOULD interpret an empty
+SOA.MNAME as an indication that Dynamic Updates are unsupported by
+that zone.
+
+Dynamic Update clients SHOULD NOT send DNS UPDATE messages for zones
+whose SOA.NAME is empty.
 
 # Impact on DNS NOTIFY
 
 {{!RFC1996}} specifies that the Primary Server, which is derived
-from the MNAME field of the SOA RDATA, be excluded from the set of
-servers to which NOTIFY messages should be sent.
+from SOA.MNAME, be excluded from the set of servers to which NOTIFY
+messages should be sent.
 
-For zones whose SOA record contains an MNAME field which corresponds
-to a server listed in the apex NS set, making the MNAME field empty
-might well cause additional NOTIFY traffic.  If this is a concern,
-the operators of the authority-only servers for the zone might
-choose to specify an explicit notify list.
+For zones where the value of SOA.MNAME record corresponds to a
+namserver listed in the apex NS RRSet, making the MNAME field empty
+might cause additional DNS NOTIFY traffic, since DNS NOTIFY messages
+that would have been suppressed towards the nameserver published
+as SOA.MNAME will instead be sent. Authoritative DNS infrastructure
+deployed on a scale where high NOTIFY traffic is a concern often
+uses dedicated zone transfer servers, separate from the authoritative
+nameservers intended to receive queries from the Internet, and in
+that situation no additional DNS NOTIFY traffic would be expected.
+However, in other situations, the operators of the authority-only
+servers for the zone might choose to avoid any unwanted NOTIFY
+traffic by using an explicit notify list.
 
 # Impact on DNS UPDATE
 
 The goal of the convention specified in this document is to prevent
 Dynamic Update clients from sending DNS UPDATE messages for particular
-zones.  The use of an empty MNAME field is intended to prevent a
+zones.  The use of an empty SOA.MNAME is intended to prevent a
 Dynamic Update client from finding a server to send DNS UPDATE
 messages to.
 
 # Unintended Consequences
 
-Some concern has been raised in the past that an empty MNAME field
+Some concern has been raised in the past that an empty SOA.MNAME
 might result in unwanted traffic being sent to root servers, e.g.
-for clients that interpret the MNAME as a zone name rather than a
-hostname and direct traffic towards the root zone's nameservers.
-However, no examples of this behaviour have been identified.
+for clients that might interpret the MNAME as a zone name rather
+than a hostname and direct traffic towards the root zone's nameservers.
+However, no examples of this behaviour have been identified and
+{{!RFC2136}} does not suggest Dynamic Update clients should act
+this way.
 
-Use of an empty MNAME field is not new; cursory analysis of passive
-DNS data demonstrates a robust volume of DNS responses with QTYPE=SOA
-and empty SOA.MNAME for zones across a variety of top-level domains.
+Use of an empty SOA.MNAME is not new; cursory analysis of passive
+DNS data demonstrates a robust volume of DNS responses that include
+an empty SOA.MNAME for zones across a variety of top-level domains.
 See {{quantify}} for discussion.
 
 # Security Considerations
@@ -181,11 +204,12 @@ See {{quantify}} for discussion.
 The convention described in this document provides no additional
 security risks to DNS zone or server administrators.
 
-Name servers which do not support Dynamic Updates for the zones
-they host might experience a security benefit from reduced DNS
-UPDATE traffic, the absence of that traffic provides additional
-headroom in network bandwidth and server capacity for legitimate
-query types.
+Name servers which do not support Dynamic Update for the zones they
+host might experience a security benefit from reduced DNS UPDATE
+traffic by including an empty SOA.MNAME in those zones, since the
+absence of that unwanted traffic might provide additional headroom
+in network bandwidth and server capacity for legitimate and intended
+DNS traffic.
 
 Clients that normally send DNS UPDATE messages might see a security
 benefit from not leaking the information contained within those
@@ -214,7 +238,7 @@ draft.
 |czds    |964     |                        |
 |imp     |634     | old gTLDs e.g. aero    |
 |opencc  |111     | see openintel website  |
-{: #realworld title="DNS Responses Observed with EMPTY SOA.MNAME"}
+{: #realworld title="DNS Responses Observed with empty SOA.MNAME"}
 
 
 # Acknowledgments
