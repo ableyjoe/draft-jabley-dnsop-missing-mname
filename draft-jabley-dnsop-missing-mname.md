@@ -136,8 +136,16 @@ Update.
 
 # Operations
 
+## DNS Implementers
+
+Implementers of DNS software MUST accept an empty value of SOA.MNAME
+as valid.
+
+
+## Zone Administrators
+
 Zone administrators who do not wish to receive Dynamic Update
-messages from clients for a particular zone may specify an empty
+messages from clients for a particular zone MAY specify an empty
 SOA.MNAME.  The textual representation of an empty field in the
 canonical representation of zone data is a single ".", as illustrated
 in {{soa}}.
@@ -151,6 +159,9 @@ in {{soa}}.
                                   1800 )    ; negative cache TTL
 ~~~
 {: #soa title="SOA Resource Record with empty SOA.MNAME"}
+
+
+## Dynamic Update Clients
 
 Dynamic Update clients who identify the recipient of DNS UPDATE
 messages from the value of SOA.MNAME SHOULD interpret an empty
