@@ -125,16 +125,17 @@ Zone administrators who do not wish to receive Dynamic Updates from
 clients for a particular zone may specify an empty MNAME field in
 that zone's SOA RDATA.  The textual representation of an empty field
 in the canonical representation of zone data is a single ".", as
-illustrated below.
+illustrated in {{soa}}.
 
 ~~~
-   @       1800    IN      SOA     jabley.automagic.org. . (
-                                     20080622  ; serial
-                                     1800      ; refresh
-                                     900       ; retry
-                                     10800     ; expire
-                                     1800 )    ; negative cache TTL
+@       1800    IN      SOA     jabley.automagic.org. . (
+                                  20080622  ; serial
+                                  1800      ; refresh
+                                  900       ; retry
+                                  10800     ; expire
+                                  1800 )    ; negative cache TTL
 ~~~
+{: #soa title="SOA Resource Record with empty MNAME"}
 
 Dynamic Update clients who identify the Primary Master server as
 the recipient of DNS UPDATE messages from the MNAME field in SOA
@@ -196,12 +197,12 @@ This document makes no requests of the IANA.
 
 --- back
 
-# Observed Use of Empty MNAME fields in SOA Responses {#quantify}
+# Empty SOA.MNAME Observed in SOA Responses {#quantify}
 
 A quick check using a variety of passive DNS datasets relating to
-observed traffic on 2024-10-30 reveals asome volume of examples in
-the real world. This data is not intended to say more than that,
-but it perhaps suggests that a study with normalisation and a longer
+observed traffic on 2024-10-30 reveals examples of responses with
+empty SOA.MNAME in the real world, as illustrated in {{realworld}}.
+This perhaps suggests that a study with normalisation and a longer
 time base might be useful to include in a future revision of this
 draft.
 
@@ -213,6 +214,7 @@ draft.
 |czds    |964     |                        |
 |imp     |634     | old gTLDs e.g. aero    |
 |opencc  |111     | see openintel website  |
+{: #realworld title="DNS Responses Observed with EMPTY SOA.MNAME"}
 
 
 # Acknowledgments
