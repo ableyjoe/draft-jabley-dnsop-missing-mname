@@ -1338,14 +1338,16 @@ clients for a particular zone may specify an empty MNAME field in
 that zone's SOA RDATA.  The textual representation of an empty field
 in the canonical representation of zone data is a single ".", as
 illustrated below.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">~~~ ascii-art {#soa}
+<div class="alignLeft art-text artwork" id="section-4-2">
+<pre>
    @       1800    IN      SOA     jabley.automagic.org. . (
-                                        20080622    ; serial
-                                        1800        ; refresh
-                                        900         ; retry
-                                        10800       ; expire
-                                        1800 )      ; negative cache TTL
-~~~<a href="#section-4-2" class="pilcrow">¶</a></p>
+                                     20080622  ; serial
+                                     1800      ; refresh
+                                     900       ; retry
+                                     10800     ; expire
+                                     1800 )    ; negative cache TTL
+</pre><a href="#section-4-2" class="pilcrow">¶</a>
+</div>
 <p id="section-4-3">Dynamic Update clients who identify the Primary Master server as
 the recipient of DNS UPDATE messages from the MNAME field in SOA
 RDATA <span class="bcp14">SHOULD</span> interpret an empty MNAME field as an indication that
@@ -1488,7 +1490,6 @@ draft.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
             <th class="text-left" rowspan="1" colspan="1">source</th>
             <th class="text-left" rowspan="1" colspan="1">counter</th>
             <th class="text-left" rowspan="1" colspan="1">notes</th>
-            <th class="text-left" rowspan="1" colspan="1">{#realworld}</th>
           </tr>
         </thead>
         <tbody>
@@ -1496,37 +1497,31 @@ draft.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">com</td>
             <td class="text-left" rowspan="1" colspan="1">109328</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">net</td>
             <td class="text-left" rowspan="1" colspan="1">8854</td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">org</td>
             <td class="text-left" rowspan="1" colspan="1">1792</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">czds</td>
             <td class="text-left" rowspan="1" colspan="1">964</td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">imp</td>
             <td class="text-left" rowspan="1" colspan="1">634</td>
             <td class="text-left" rowspan="1" colspan="1">old gTLDs e.g. aero</td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">opencc</td>
             <td class="text-left" rowspan="1" colspan="1">111</td>
             <td class="text-left" rowspan="1" colspan="1">see openintel website</td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
         </tbody>
       </table>
