@@ -178,13 +178,6 @@ This document makes no requests of the IANA.
 
 --- back
 
-# Change History
-
-This section to be removed prior to publication.
-
-00 Initial draft, circulated as draft-jabley-dnsop-missing-mname-00 in
-June 2008.
-
 # Acknowledgments
 {:numbered="false"}
 
