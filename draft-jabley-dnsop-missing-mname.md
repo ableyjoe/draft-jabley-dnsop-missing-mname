@@ -213,8 +213,8 @@ might result in unwanted traffic being sent to root servers, e.g.,
 for clients that might interpret the `MNAME` as a host name and try
 to use the DNS to find addresses for it.
 
-Use of an empty `SOA.MNAME` is not new; cursory analysis of passive
-DNS data demonstrates a robust volume of DNS responses that include
+Use of an empty `SOA.MNAME` is not new; cursory analysis of active
+DNS measurement data demonstrates a robust volume of DNS responses that include
 an empty `SOA.MNAME` for zones across a variety of top-level domains.
 No negative consequences of this traffic have been identified.  See
 {{quantify}} for discussion.
@@ -253,7 +253,7 @@ This document makes no requests of the IANA.
 
 # Empty SOA.MNAME Observed in SOA Responses {#quantify}
 
-A quick check using a variety of passive DNS datasets relating to
+A quick check using a variety of active DNS measurement datasets relating to
 observed traffic on 2024-10-30 reveals examples of responses with
 empty `SOA.MNAME` in the real world, as illustrated in {{realworld}}.
 This perhaps suggests that a study with normalisation and a longer
@@ -280,5 +280,5 @@ of the people have concerned have long since faded from memory,
 but the authors thank them generally and anonymously, regardless.
 
 Raffaele Sommese helped quantify existing observed use of SOA
-responses with empty `MNAME` fields in a variety of passive DNS
-datasets, as summarised briefly in {{quantify}}.
+responses with empty `MNAME` fields in a variety of active DNS
+measurement datasets, as summarised briefly in {{quantify}}.
