@@ -8,15 +8,14 @@
 <meta content="Joe Abley" name="author">
 <meta content="Peter Thomassen" name="author">
 <meta content='
-       The Start of Authority (SOA) Resource Record (RR) in the Domain
-Name System (DNS) includes various parameters related to the
-handling of data in DNS zones.  These parameters are variously used
-by authority-only servers, caching resolvers and DNS clients to
-guide them in the way that data contained within particular zones
-should be used. 
-       One particular field in the SOA RR is known as MNAME, which is used
-to specify the "Primary Master" server for a zone.  This is the
-server to which clients use Dynamic Update to send DNS UPDATE
+       The Start of Authority Resource Record in the Domain Name System
+includes various parameters related to the handling of data in DNS
+zones.  These parameters are variously used by authority-only
+servers, caching resolvers and DNS clients to guide them in the way
+that data contained within particular zones should be used. 
+       One particular field in the SOA RR is known as  MNAME , which is
+used to specify the "Primary Master" server for a zone.  This is
+the server to which clients use Dynamic Update to send DNS UPDATE
 messages. Many zones do not support the Dynamic Update, and any
 such DNS UPDATE messages which are received provide no usual purpose.
 For such zones it may be preferable not to receive updates from
@@ -25,23 +24,23 @@ clients at all.
 signal to clients that a particular zone does not support Dynamic
 Update. 
     ' name="description">
-<meta content="xml2rfc 3.24.0" name="generator">
+<meta content="xml2rfc 3.28.1" name="generator">
 <meta content="dns" name="keyword">
 <meta content="mname" name="keyword">
 <meta content="draft-jabley-dnsop-missing-mname-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.24.0
-    Python 3.12.7
+  xml2rfc 3.28.1
+    Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.4
-    lxml 5.3.0
-    platformdirs 4.3.6
-    pycountry 22.3.5
-    PyYAML 6.0.1
-    requests 2.32.3
-    setuptools 70.3.0
+    Jinja2 3.1.6
+    lxml 5.3.1
+    platformdirs 4.3.8
+    pycountry 24.6.1
+    PyYAML 6.0.2
+    requests 2.32.4
+    setuptools 80.9.0
     wcwidth 0.2.13
 -->
 <link href="draft-jabley-dnsop-missing-mname.xml" rel="alternate" type="application/rfc+xml">
@@ -295,6 +294,12 @@ body {
 }
 
 /* headings */
+section {
+  clear: both;
+}
+.section-number {
+  padding-right: 0.5em;
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-title);
   font-weight: 680;
@@ -326,6 +331,7 @@ h4, h5, h6 {
 /* general structure */
 .author {
   padding-bottom: 0.3em;
+  vertical-align: top;
 }
 #abstract+p {
   font-size: 18px;
@@ -403,25 +409,26 @@ svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
 ol, ul {
   padding: 0;
   margin: 0 0 0.5em 2em;
-}
-:is(ol, ul) :is(ol, ul) {
-  margin-left: 1em;
+  & :is(ol, ul) {
+    margin-left: 1em;
+  }
 }
 li {
   margin: 0 0 0.25em 0;
 }
-.ulCompact li {
-  margin: 0;
-}
 ul.empty, .ulEmpty {
   list-style-type: none;
-}
-ul.empty li, .ulEmpty li {
-  margin-top: 0.5em;
+  & li {
+    margin-top: 0.5em;
+  }
 }
 :is(ul, ol).compact, .ulCompact, .olCompact {
-  line-height: 1;
   margin: 0 0 0 2em;
+  & li {
+    margin: 0;
+    & :first-child { margin-top: 0; }
+    & :last-child { margin-bottom: 0; }
+  }
 }
 
 /* definition lists */
@@ -429,38 +436,39 @@ dl {
   clear: left;
   --indent: 3ch;
   /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+  &.olPercent {
+    --indent: 5ch;
+    & > dt {
+      min-width: calc(var(--indent) - 2ch);
+    }
+  }
+  &.olPercent > dt {
+    float: none;
+  }
+
+  dl > dd > & {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
 }
-dl.olPercent {
-  --indent: 5ch;
-}
-dl > dt {
+dl:not(.dlNewline) > dt {
   float: left;
   margin-right: 2ch;
   min-width: 8ch;
-}
-dl.dlNewline > dt {
-  float: none;
 }
 dl > dd {
   margin-bottom: .8em;
   margin-left: var(--indent) !important; /* stupid element overrides */
   min-height: 2ex;
 }
-dl.olPercent > dt {
-  min-width: calc(var(--indent) - 2ch);
-}
 :is(dl.compact, .dlCompact) > dd {
   margin-bottom: 0;
-}
-:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
-  margin-top: 0;
-}
-:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
-  margin-bottom: 0;
-}
-dl > dd > dl {
-  margin-top: 0.5em;
-  margin-bottom: 0;
+  & > :is(:first-child, .break:first-child + *) {
+    margin-top: 0;
+  }
+  & > :is(:last-child) {
+    margin-bottom: 0;
+  }
 }
 :is(dd, span).break {
   display: none;
@@ -524,6 +532,7 @@ figcaption, caption {
   font-style: italic;
   margin: 0.5em 1.5em;
   text-align: left;
+  caption-side: bottom;
 }
 @media screen {
   /* Auto-collapse boilerplate. */
@@ -541,7 +550,11 @@ figcaption, caption {
   }
   pre, svg {
     display: inline-block;
-    overflow-x: auto;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
   }
   pre {
     max-width: 100%;
@@ -578,6 +591,7 @@ cite {
 
 /* tables */
 table {
+  width: auto;
   max-width: 100%;
   margin: 0 0 1em;
   border-collapse: collapse;
@@ -592,6 +606,16 @@ table.center {
 table.left {
   margin-right: auto;
 }
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
 thead, tbody {
   border: 1px solid var(--line-color);
 }
@@ -622,9 +646,11 @@ a.pilcrow {
   margin-left: 3px;
   opacity: 0.2;
   user-select: none;
+  &[href] {
+    color: var(--pilcrow-weak);
+    &:hover { text-decoration: none; }
+  }
 }
-a.pilcrow[href] { color: var(--pilcrow-weak); }
-a.pilcrow[href]:hover { text-decoration: none; }
 @media not print {
   :hover > a.pilcrow {
     opacity: 1;
@@ -664,26 +690,28 @@ sub, sup {
   font-size: var(--small-font-size);
   line-height: 18px;
   --identifier-width: 15ch;
-}
-#identifiers dt {
-  width: var(--identifier-width);
-  min-width: var(--identifier-width);
-  clear: left;
-  float: left;
-  text-align: right;
-  margin-right: 1ch;
-}
-#identifiers dd {
-  margin: 0;
-  margin-left: calc(1em + var(--identifier-width)) !important;
-  min-width: 5em;
-}
-#identifiers .authors .author {
-  display: inline-block;
-  margin-right: 1.5em;
-}
-#identifiers .authors .org {
-  font-style: italic;
+  & dt {
+    width: var(--identifier-width);
+    min-width: var(--identifier-width);
+    clear: left;
+    float: left;
+    text-align: right;
+    margin-right: 1ch;
+  }
+  & dd {
+    margin: 0;
+    margin-left: calc(1em + var(--identifier-width)) !important;
+    min-width: 5em;
+  }
+  & .authors {
+    & .author {
+      display: inline-block;
+      margin-right: 1.5em;
+    }
+    & .org {
+      font-style: italic;
+    }
+  }
 }
 
 /* The prepared/rendered info at the very bottom of the page */
@@ -694,9 +722,6 @@ sub, sup {
   margin-top: 2em;
 }
 .docInfo .prepared {
-  float: left;
-}
-.docInfo .prepared {
   float: right;
 }
 
@@ -704,53 +729,48 @@ sub, sup {
 #toc {
   padding: 0.75em 0 2em 0;
   margin-bottom: 1em;
-}
-@media screen {
-  #toc nav {
-    font-family: var(--font-title);
-    font-weight: 360;
+
+  & nav {
+    & ul {
+      margin: 0 0.5em 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    & li {
+      line-height: 1.3em;
+      margin: 2px 0;
+      padding-left: 1.2em;
+      text-indent: -1.2em;
+    }
+  }
+  & a.xref {
+    white-space: normal;
   }
 }
-#toc nav ul {
-  margin: 0 0.5em 0 0;
-  padding: 0;
-  list-style: none;
-}
-#toc nav li {
-  line-height: 1.3em;
-  margin: 2px 0;
-  padding-left: 1.2em;
-  text-indent: -1.2em;
-}
-#toc a.xref {
-  white-space: normal;
-}
-/* references */
-.references dt {
-  text-align: right;
-  font-weight: bold;
-  min-width: 10ch;
-  margin-right: 1.5ch;
-}
-.references dt:target::before {
-  content: "⇒";
-  width: 15px;
-  margin: 0 10px 0 -25px;
-}
-.references dd {
-  margin-left: 12ch !important;
-  overflow: auto;
+
+.references {
+  & > dt {
+    text-align: right;
+    font-weight: bold;
+    min-width: 10ch;
+    margin-right: 1.5ch;
+    &:target::before {
+      content: "⇒";
+      margin: 0 10px 0 -25px;
+    }
+  }
+  & > dd {
+    margin-left: 12ch !important;
+    overflow: visible;
+    & .refInstance {
+      margin-bottom: 0.8em;
+    }
+    & .ascii {
+      margin-bottom: 0.25em;
+    }
+  }
 }
 
-.refInstance {
-  margin-bottom: 1.25em;
-}
-
-.references .ascii {
-  margin-bottom: 0.25em;
-}
-
-/* index */
 #rfc\.index\.index + ul {
   margin-left: 0;
 }
@@ -758,21 +778,33 @@ sub, sup {
 /* authors */
 address.vcard {
   font-style: normal;
-  margin: 1em 0;
+  max-width: 20em;
+  margin: 1em auto 1em 0;
+
+  & .nameRole {
+    font-weight: 700;
+    margin-left: 0;
+  }
+  & .label {
+    margin: 0.5em 0;
+  }
+  & .type {
+    display: none;
+  }
+  & .alternative-contact {
+    margin: 0.5em 0 0.25em 0;
+  }
+  & .non-ascii {
+    margin: 0 0 0 2em;
+  }
+  & div.left {
+    text-align: left;
+  }
+  & div.right {
+    text-align: right;
+  }
 }
-address.vcard .nameRole {
-  font-weight: 700;
-  margin-left: 0;
-}
-address.vcard .label {
-  margin: 0.5em 0;
-}
-address.vcard .type {
-  display: none;
-}
-.alternative-contact {
-  margin: 1.5em 0 1em;
-}
+
 hr.addr {
   border-top: 1px dashed;
   margin: 0;
@@ -794,6 +826,7 @@ hr.addr {
   }
 }
 
+/* Comments */
 .rfcEditorRemove p:first-of-type {
   font-style: italic;
 }
@@ -804,7 +837,31 @@ hr.addr {
 .crefSource {
   font-style: italic;
 }
-/* alternative layout for smaller screens */
+
+@media screen {
+  #toc nav {
+    font-family: var(--font-title);
+    font-weight: 360;
+    & > ul { margin-bottom: 2em; }
+    & ul {
+      margin: 0 0 0 4px;
+      & :is(p, li) {
+        margin: 2px 0;
+      }
+    }
+  }
+  #toc a.toplink {
+    float: right;
+  }
+}
+@media not screen {
+  #toc a.toplink {
+    display: none;
+  }
+}
+
+
+/* TOC layout for smaller screens */
 @media screen and (max-width: 929px) {
   #toc {
     position: fixed;
@@ -815,9 +872,6 @@ hr.addr {
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
-  }
-  #toc.active {
-      opacity: 1;
   }
   #toc h2 {
     margin: 0;
@@ -830,17 +884,17 @@ hr.addr {
     background-color: #444;
     color: white;
     cursor: pointer;
-  }
-  #toc h2::before { /* css hamburger */
-    float: right;
-    position: relative;
-    width: 1em;
-    height: 1px;
-    left: -164px;
-    margin: 8px 0 0 0;
-    background: white none repeat scroll 0 0;
-    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
-    content: "";
+    &::before { /* css hamburger */
+      float: right;
+      position: relative;
+      width: 1em;
+      height: 1px;
+      left: -164px;
+      margin: 8px 0 0 0;
+      background: white none repeat scroll 0 0;
+      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+      content: "";
+    }
   }
   #toc nav {
     display: none;
@@ -851,14 +905,13 @@ hr.addr {
     height: calc(100vh - 48px);
     border-left: 1px solid #ddd;
   }
-  #toc.active nav {
-    display: block;
+  #toc.active {
+    opacity: 1;
+    & nav { display: block; }
   }
   /* Make the collapsed ToC header render white on gray also when it's a link */
   #toc h2 a,
-  #toc h2 a:link,
-  #toc h2 a:focus,
-  #toc h2 a:hover,
+  #toc h2 a:is(:link, :focus, :hover),
   #toc a.toplink,
   #toc a.toplink:hover {
     color: white;
@@ -866,11 +919,11 @@ hr.addr {
     text-decoration: none;
   }
   #toc a.toplink {
-    margin-top: 2px;
+    margin: 2px 0.5em 0;
   }
 }
 
-/* alternative layout for wide screens */
+/* TOC layout for wide screens */
 @media screen and (min-width: 930px) {
   body {
     padding-right: 360px;
@@ -899,20 +952,12 @@ hr.addr {
     overscroll-behavior: contain;
     scrollbar-width: thin;
   }
-  #toc nav > ul  {
-    margin-bottom: 2em;
-  }
-  #toc ul {
-    margin: 0 0 0 4px;
-    font-size: var(--small-font-size);
-  }
-  #toc ul :is(p, li) {
-    margin: 2px 0;
-    line-height: 22px;
-  }
   img { /* future proofing */
     max-width: 100%;
     height: auto;
+  }
+  #toc a.toplink {
+    margin: 8px 0.5em 0;
   }
 }
 
@@ -955,9 +1000,6 @@ hr.addr {
   td {
     border-top: 1px solid #ddd;
   }
-  .toplink {
-    display: none;
-  }
 }
 
 @page :first {
@@ -980,82 +1022,6 @@ hr.addr {
   size: A4;
   margin-bottom: 45mm;
   padding-top: 20px;
-}
-
-/* Changes introduced to fix issues found during implementation */
-
-/* Separate body from document info even without intervening H1 */
-section {
-  clear: both;
-}
-
-/* Top align author divs, to avoid names without organization dropping level with org names */
-.author {
-  vertical-align: top;
-}
-
-/* Style section numbers with more space between number and title */
-.section-number {
-  padding-right: 0.5em;
-}
-
-/* Add styling for a link in the ToC that points to the top of the document */
-a.toplink {
-  float: right;
-  margin: 8px 0.5em 0;
-}
-
-/* Provide styling for table cell text alignment */
-table .text-left {
-  text-align: left;
-}
-table .text-center {
-  text-align: center;
-}
-table .text-right {
-  text-align: right;
-}
-
-/* Make the alternative author contact information look less like just another
-   author, and group it closer with the primary author contact information */
-.alternative-contact {
-  margin: 0.5em 0 0.25em 0;
-}
-address .non-ascii {
-  margin: 0 0 0 2em;
-}
-
-/* With it being possible to set tables with alignment
-  left, center, and right, { width: 100%; } does not make sense */
-table {
-  width: auto;
-}
-
-/* Avoid reference text that sits in a block with very wide left margin,
-   because of a long floating dt label.*/
-.references dd {
-  overflow: visible;
-}
-
-/* Control caption placement */
-caption {
-  caption-side: bottom;
-}
-
-/* Limit the width of the author address vcard, so names in right-to-left
-   script don't end up on the other side of the page. */
-
-address.vcard {
-  max-width: 20em;
-  margin-right: auto;
-}
-
-/* For address alignment dependent on LTR or RTL scripts */
-address div.left {
-  text-align: left;
-}
-address div.right {
-  text-align: right;
 }
 
 /* Dark mode. */
@@ -1094,11 +1060,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Non-Availability of Dynamic Updates</td>
-<td class="right">November 2024</td>
+<td class="right">June 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Abley &amp; Thomassen</td>
-<td class="center">Expires 17 May 2025</td>
+<td class="center">Expires 19 December 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1114,12 +1080,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc2136" class="eref">2136</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-11-13" class="published">13 November 2024</time>
+<time datetime="2025-06-17" class="published">17 June 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-05-17">17 May 2025</time></dd>
+<dd class="expires"><time datetime="2025-12-19">19 December 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,15 +1102,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Indicating Non-Availability of Dynamic Updates in the DNS</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">The Start of Authority (SOA) Resource Record (RR) in the Domain
-Name System (DNS) includes various parameters related to the
-handling of data in DNS zones.  These parameters are variously used
-by authority-only servers, caching resolvers and DNS clients to
-guide them in the way that data contained within particular zones
-should be used.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">One particular field in the SOA RR is known as MNAME, which is used
-to specify the "Primary Master" server for a zone.  This is the
-server to which clients use Dynamic Update to send DNS UPDATE
+<p id="section-abstract-1">The Start of Authority Resource Record in the Domain Name System
+includes various parameters related to the handling of data in DNS
+zones.  These parameters are variously used by authority-only
+servers, caching resolvers and DNS clients to guide them in the way
+that data contained within particular zones should be used.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">One particular field in the SOA RR is known as <code>MNAME</code>, which is
+used to specify the "Primary Master" server for a zone.  This is
+the server to which clients use Dynamic Update to send DNS UPDATE
 messages. Many zones do not support the Dynamic Update, and any
 such DNS UPDATE messages which are received provide no usual purpose.
 For such zones it may be preferable not to receive updates from
@@ -1187,7 +1152,7 @@ Update.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1196,7 +1161,7 @@ Update.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2024 IETF Trust and the persons identified as the
+            Copyright (c) 2025 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1254,7 +1219,7 @@ Update.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-update-to-rfc-2136" class="internal xref">Update to RFC 2136</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-updates-to-rfc-2136" class="internal xref">Updates to RFC 2136</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1315,8 +1280,8 @@ described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</s
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">This document assumes familiarity with the terminology of the Domain
 Name System as described in <span>[<a href="#RFC9499" class="cite xref">RFC9499</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">This document uses the abbreviation SOA.MNAME to mean the MNAME field
-of the RDATA of an SOA Resource Record.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-3">This document uses the abbreviation <code>SOA.MNAME</code> to mean the <code>MNAME</code>
+field of the RDATA of an <code>SOA</code> Resource Record.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">This document uses the phrase "Dynamic Update" to describe the
 general facility used by clients to request changes to DNS data
 published by authority servers, and "DNS UPDATE" to refer to the
@@ -1330,11 +1295,11 @@ for more information about Dynamic Update.<a href="#section-2-4" class="pilcrow"
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-use-of-soamname" class="section-name selfRef">Use of SOA.MNAME</a>
       </h2>
 <p id="section-3-1">The Start of Authority (SOA) Resource Record (RR) is defined in
-<span>[<a href="#RFC1035" class="cite xref">RFC1035</a>]</span>.  The MNAME field of the SOA RDATA (SOA.MNAME) is
+<span>[<a href="#RFC1035" class="cite xref">RFC1035</a>]</span>.  The <code>MNAME</code> field of the SOA RDATA (<code>SOA.MNAME</code>) is
 defined in that document as "The &lt;domain-name&gt; of the name
 server that was the original or primary source of data for this
 zone."<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2"><span>[<a href="#RFC1035" class="cite xref">RFC1035</a>]</span> includes no specific guidance on the use of SOA.MNAME,
+<p id="section-3-2"><span>[<a href="#RFC1035" class="cite xref">RFC1035</a>]</span> includes no specific guidance on the use of <code>SOA.MNAME</code>,
 although the general tone in which SOA RDATA are discussed suggests
 that its intended purpose was for the management of zone transfers
 between authority-only servers.  There are no known implementations
@@ -1342,18 +1307,18 @@ of authority-only servers known to the author which use SOA.MNAME
 to manage or perform zone transfers, however; for bootstrapping
 reasons, commonly-deployed implementations require master servers
 to be specified explicitly, usually by address rather than name.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">SOA.MNAME was subsequently referred to in <span>[<a href="#RFC1996" class="cite xref">RFC1996</a>]</span> as part of
-the definition of the term "Primary Master".  The server specified
-in SOA.MNAME was, by default, to be excluded from the set of servers
-to which DNS NOTIFY messages would be sent.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">In <span>[<a href="#RFC2136" class="cite xref">RFC2136</a>]</span> SOA.MNAME was again used to provide a definition
+<p id="section-3-3"><code>SOA.MNAME</code> was subsequently referred to in <span>[<a href="#RFC1996" class="cite xref">RFC1996</a>]</span> as part
+of the definition of the term "Primary Master".  The server specified
+in <code>SOA.MNAME</code> was, by default, to be excluded from the set of
+servers to which DNS NOTIFY messages would be sent.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">In <span>[<a href="#RFC2136" class="cite xref">RFC2136</a>]</span> <code>SOA.MNAME</code> was again used to provide a definition
 of the term "Primary Master", in this case for the purpose of
 identifying the server towards which DNS UPDATE messages relating
 to that zone should be sent.<a href="#section-3-4" class="pilcrow">¶</a></p>
-<p id="section-3-5">There have been no other references to the use of SOA.MNAME in the
-RFC series.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-5">There have been no other references to the use of <code>SOA.MNAME</code> in
+the RFC series.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">This document specifies a convention by which a zone operator may
-include an empty SOA.MNAME in order to deliberately specify that
+include an empty <code>SOA.MNAME</code> in order to deliberately specify that
 there is no appropriate place for Dynamic Update messages to be
 sent, i.e. that the corresponding zone does not support Dynamic
 Update.<a href="#section-3-6" class="pilcrow">¶</a></p>
@@ -1369,10 +1334,10 @@ Update.<a href="#section-3-6" class="pilcrow">¶</a></p>
         <h3 id="name-dns-software">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-dns-software" class="section-name selfRef">DNS Software</a>
         </h3>
-<p id="section-4.1-1">DNS software <span class="bcp14">MUST</span> accept an empty value of SOA.MNAME as valid.  This
-includes software that consumes, generates, collects, manages and
-validates DNS messages and software that provides related provisioning
-and user interfaces for zone administrators.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">DNS software <span class="bcp14">MUST</span> accept an empty value of <code>SOA.MNAME</code> as valid.
+This includes software that consumes, generates, collects, manages
+and validates DNS messages and software that provides related
+provisioning and user interfaces for zone administrators.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="zone-administrators">
@@ -1382,14 +1347,14 @@ and user interfaces for zone administrators.<a href="#section-4.1-1" class="pilc
         </h3>
 <p id="section-4.2-1">Zone administrators who do not wish to receive Dynamic Update
 messages from clients for a particular zone <span class="bcp14">MAY</span> specify an empty
-SOA.MNAME.  The textual representation of an empty field in the
+<code>SOA.MNAME</code>.  The textual representation of an empty field in the
 canonical representation of zone data is a single ".", as illustrated
 in <a href="#soa" class="auto internal xref">Figure 1</a>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <span id="name-soa-resource-record-with-em"></span><div id="soa">
 <figure id="figure-1">
           <div class="alignLeft art-text artwork" id="section-4.2-2.1">
 <pre>
-@       1800    IN      SOA     jabley.automagic.org. . (
+@       1800    IN      SOA     administrator.example.org. . (
                                   20080622  ; serial
                                   1800      ; refresh
                                   900       ; retry
@@ -1409,11 +1374,11 @@ in <a href="#soa" class="auto internal xref">Figure 1</a>.<a href="#section-4.2-
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-dynamic-update-clients" class="section-name selfRef">Dynamic Update Clients</a>
         </h3>
 <p id="section-4.3-1">Dynamic Update clients who identify the recipient of DNS UPDATE
-messages from the value of SOA.MNAME <span class="bcp14">SHOULD</span> interpret an empty
-SOA.MNAME as an indication that Dynamic Updates are unsupported by
-that zone.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+messages from the value of <code>SOA.MNAME</code> <span class="bcp14">SHOULD</span> interpret an empty
+<code>SOA.MNAME</code> as an indication that Dynamic Updates are unsupported
+by that zone.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.3-2">Dynamic Update clients <span class="bcp14">SHOULD NOT</span> send DNS UPDATE messages for zones
-whose SOA.NAME is empty.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+whose <code>SOA.NAME</code> is empty.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1431,11 +1396,11 @@ whose SOA.NAME is empty.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-1"><span>[<a href="#RFC1996" class="cite xref">RFC1996</a>]</span> specifies that the Primary Server, which is derived
 from SOA.MNAME, be excluded from the set of servers to which NOTIFY
 messages should be sent.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">For zones where the value of SOA.MNAME record corresponds to a
+<p id="section-5.1-2">For zones where the value of <code>SOA.MNAME</code> record corresponds to a
 namserver listed in the apex NS RRSet, making the MNAME field empty
 might cause additional DNS NOTIFY traffic, since DNS NOTIFY messages
 that would have been suppressed towards the nameserver published
-as SOA.MNAME will instead be sent.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+as <code>SOA.MNAME</code> will instead be sent.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3">Authoritative DNS infrastructure deployed on a scale where high
 NOTIFY traffic is a concern often uses dedicated zone transfer
 servers, separate from the authoritative nameservers intended to
@@ -1453,7 +1418,7 @@ notify list.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-5.2-1">The goal of the convention specified in this document is to prevent
 Dynamic Update clients from sending DNS UPDATE messages for particular
-zones.  The use of an empty SOA.MNAME is intended to prevent a
+zones.  The use of an empty <code>SOA.MNAME</code> is intended to prevent a
 Dynamic Update client from finding a server to send DNS UPDATE
 messages to.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </section>
@@ -1463,29 +1428,26 @@ messages to.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
         <h3 id="name-unintended-consequences">
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-unintended-consequences" class="section-name selfRef">Unintended Consequences</a>
         </h3>
-<p id="section-5.3-1">Some concern has been raised in the past that an empty SOA.MNAME
+<p id="section-5.3-1">Some concern has been raised in the past that an empty <code>SOA.MNAME</code>
 might result in unwanted traffic being sent to root servers, e.g.
-for clients that might interpret the MNAME as a zone name rather
-than a hostname and direct traffic towards the root zone's nameservers.
-However, no examples of this behaviour have been identified and
-<span>[<a href="#RFC2136" class="cite xref">RFC2136</a>]</span> does not suggest Dynamic Update clients should act
-this way.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.3-2">Use of an empty SOA.MNAME is not new; cursory analysis of passive
+for clients that might interpret the <code>MNAME</code> as a host name and try
+to use the DNS to find addresses for it.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">Use of an empty <code>SOA.MNAME</code> is not new; cursory analysis of passive
 DNS data demonstrates a robust volume of DNS responses that include
-an empty SOA.MNAME for zones across a variety of top-level domains.
+an empty <code>SOA.MNAME</code> for zones across a variety of top-level domains.
 No negative consequences of this traffic have been identified.  See
 <a href="#quantify" class="auto internal xref">Appendix A</a> for discussion.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="update-to-rfc-2136">
+<div id="updates-to-rfc-2136">
 <section id="section-6">
-      <h2 id="name-update-to-rfc-2136">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-update-to-rfc-2136" class="section-name selfRef">Update to RFC 2136</a>
+      <h2 id="name-updates-to-rfc-2136">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-updates-to-rfc-2136" class="section-name selfRef">Updates to RFC 2136</a>
       </h2>
 <p id="section-6-1"><span>[<a href="#RFC2136" class="cite xref">RFC2136</a>]</span> is updated to reflect the interpretation of an empty
-SOA.MNAME as meaning that the enclosing zone does not support Dynamic
+<code>SOA.MNAME</code> to mean that the enclosing zone does not support Dynamic
 Update.<a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1498,7 +1460,7 @@ Update.<a href="#section-6-1" class="pilcrow">¶</a></p>
 security risks to DNS zone or server administrators.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">Name servers which do not support Dynamic Update for the zones they
 host might experience a security benefit from reduced DNS UPDATE
-traffic by including an empty SOA.MNAME in those zones, since the
+traffic by including an empty <code>SOA.MNAME</code> in those zones, since the
 absence of that unwanted traffic might provide additional headroom
 in network bandwidth and server capacity for legitimate and intended
 DNS traffic.<a href="#section-7-2" class="pilcrow">¶</a></p>
@@ -1571,7 +1533,7 @@ messages to nameservers that are not configured to receive them.<a href="#sectio
       </h2>
 <p id="appendix-A-1">A quick check using a variety of passive DNS datasets relating to
 observed traffic on 2024-10-30 reveals examples of responses with
-empty SOA.MNAME in the real world, as illustrated in <a href="#realworld" class="auto internal xref">Table 1</a>.
+empty <code>SOA.MNAME</code> in the real world, as illustrated in <a href="#realworld" class="auto internal xref">Table 1</a>.
 This perhaps suggests that a study with normalisation and a longer
 time base might be useful to include in a future revision of this
 draft.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
@@ -1646,8 +1608,6 @@ datasets, as summarised briefly in <a href="#quantify" class="auto internal xref
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Joe Abley</span></div>
 <div dir="auto" class="left"><span class="org">Cloudflare</span></div>
-<div dir="auto" class="left"><span class="locality">Amsterdam</span></div>
-<div dir="auto" class="left"><span class="country-name">Netherlands</span></div>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:jabley@cloudflare.com" class="email">jabley@cloudflare.com</a>
@@ -1656,8 +1616,6 @@ datasets, as summarised briefly in <a href="#quantify" class="auto internal xref
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Peter Thomassen</span></div>
 <div dir="auto" class="left"><span class="org">deSEC, Secure Systems Engineering</span></div>
-<div dir="auto" class="left"><span class="locality">Berlin</span></div>
-<div dir="auto" class="left"><span class="country-name">Germany</span></div>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:peter@desec.io" class="email">peter@desec.io</a>

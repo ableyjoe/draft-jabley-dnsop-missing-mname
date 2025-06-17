@@ -6,7 +6,7 @@ Domain Name System Operations                                   J. Abley
 Internet-Draft                                                Cloudflare
 Updates: 2136 (if approved)                                 P. Thomassen
 Intended status: Standards Track       deSEC, Secure Systems Engineering
-Expires: 17 May 2025                                    13 November 2024
+Expires: 19 December 2025                                   17 June 2025
 
 
        Indicating Non-Availability of Dynamic Updates in the DNS
@@ -14,11 +14,11 @@ Expires: 17 May 2025                                    13 November 2024
 
 Abstract
 
-   The Start of Authority (SOA) Resource Record (RR) in the Domain Name
-   System (DNS) includes various parameters related to the handling of
-   data in DNS zones.  These parameters are variously used by authority-
-   only servers, caching resolvers and DNS clients to guide them in the
-   way that data contained within particular zones should be used.
+   The Start of Authority Resource Record in the Domain Name System
+   includes various parameters related to the handling of data in DNS
+   zones.  These parameters are variously used by authority-only
+   servers, caching resolvers and DNS clients to guide them in the way
+   that data contained within particular zones should be used.
 
    One particular field in the SOA RR is known as MNAME, which is used
    to specify the "Primary Master" server for a zone.  This is the
@@ -62,11 +62,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 May 2025.
+   This Internet-Draft will expire on 19 December 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -91,7 +91,7 @@ Table of Contents
      5.1.  Impact on DNS NOTIFY
      5.2.  Impact on Dynamic Update
      5.3.  Unintended Consequences
-   6.  Update to RFC 2136
+   6.  Updates to RFC 2136
    7.  Security Considerations
    8.  IANA Considerations
    9.  References
@@ -188,7 +188,7 @@ Table of Contents
    canonical representation of zone data is a single ".", as illustrated
    in Figure 1.
 
-   @       1800    IN      SOA     jabley.automagic.org. . (
+   @       1800    IN      SOA     administrator.example.org. . (
                                      20080622  ; serial
                                      1800      ; refresh
                                      900       ; retry
@@ -242,11 +242,8 @@ Table of Contents
 
    Some concern has been raised in the past that an empty SOA.MNAME
    might result in unwanted traffic being sent to root servers, e.g. for
-   clients that might interpret the MNAME as a zone name rather than a
-   hostname and direct traffic towards the root zone's nameservers.
-   However, no examples of this behaviour have been identified and
-   [RFC2136] does not suggest Dynamic Update clients should act this
-   way.
+   clients that might interpret the MNAME as a host name and try to use
+   the DNS to find addresses for it.
 
    Use of an empty SOA.MNAME is not new; cursory analysis of passive DNS
    data demonstrates a robust volume of DNS responses that include an
@@ -254,10 +251,10 @@ Table of Contents
    negative consequences of this traffic have been identified.  See
    Appendix A for discussion.
 
-6.  Update to RFC 2136
+6.  Updates to RFC 2136
 
    [RFC2136] is updated to reflect the interpretation of an empty
-   SOA.MNAME as meaning that the enclosing zone does not support Dynamic
+   SOA.MNAME to mean that the enclosing zone does not support Dynamic
    Update.
 
 7.  Security Considerations
@@ -354,13 +351,9 @@ Authors' Addresses
 
    Joe Abley
    Cloudflare
-   Amsterdam
-   Netherlands
    Email: jabley@cloudflare.com
 
 
    Peter Thomassen
    deSEC, Secure Systems Engineering
-   Berlin
-   Germany
    Email: peter@desec.io
