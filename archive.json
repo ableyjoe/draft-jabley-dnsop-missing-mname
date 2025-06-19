@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-17T01:39:14.745215+00:00",
+  "timestamp": "2025-06-19T01:39:30.356863+00:00",
   "repo": "ableyjoe/draft-jabley-dnsop-missing-mname",
   "labels": [
     {
@@ -50,5 +50,286 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 8,
+      "id": "PR_kwDONORxZs6a9boS",
+      "title": "Update",
+      "url": "https://github.com/ableyjoe/draft-jabley-dnsop-missing-mname/pull/8",
+      "state": "OPEN",
+      "author": "peterthomassen",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Mostly clarity, typos etc.",
+      "createdAt": "2025-06-17T19:55:51Z",
+      "updatedAt": "2025-06-18T08:15:58Z",
+      "baseRepository": "ableyjoe/draft-jabley-dnsop-missing-mname",
+      "baseRefName": "main",
+      "baseRefOid": "d4a34b7936d9686cc7cbee718d22785ebcc5f9d2",
+      "headRepository": "ableyjoe/draft-jabley-dnsop-missing-mname",
+      "headRefName": "20250617_peter",
+      "headRefOid": "91b351a0fc24582769d3eba379b568c45ff929e0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONORxZs6vHUiI",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "ableyjoe",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-18T06:46:02Z",
+          "updatedAt": "2025-06-18T06:46:02Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I just took the abbreviations out of the abstract, but I agree leaving the SOA record in there is sensible, since I think it's true that more people will recognise \"SOA\" than \"Start of Authority\".",
+              "createdAt": "2025-06-18T06:46:02Z",
+              "updatedAt": "2025-06-18T06:46:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vHVKP",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "ableyjoe",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-18T06:47:10Z",
+          "updatedAt": "2025-06-18T06:47:10Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "This is better English (\"to which clients [...] send messages\").",
+              "createdAt": "2025-06-18T06:47:10Z",
+              "updatedAt": "2025-06-18T06:47:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vHVmX",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "ableyjoe",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-18T06:47:50Z",
+          "updatedAt": "2025-06-18T06:47:50Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "I don't know what \"avoid naming a host capable\" means because \"name\" is disasterously overloaded. I think the text is easier to understand without this change.",
+              "createdAt": "2025-06-18T06:47:50Z",
+              "updatedAt": "2025-06-18T06:47:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vHWKO",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "ableyjoe",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-18T06:48:42Z",
+          "updatedAt": "2025-06-18T06:48:42Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "what does \"for other reasons\" add that \"policy\" doesn't already cover?",
+              "createdAt": "2025-06-18T06:48:42Z",
+              "updatedAt": "2025-06-18T06:48:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vHWcJ",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "ableyjoe",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-18T06:49:11Z",
+          "updatedAt": "2025-06-18T06:49:12Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "again, let's avoid using words like \"name\" in different ways. I think signal is clearer.",
+              "createdAt": "2025-06-18T06:49:11Z",
+              "updatedAt": "2025-06-18T06:49:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vHXhP",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "ableyjoe",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-18T06:51:00Z",
+          "updatedAt": "2025-06-18T06:51:01Z",
+          "comments": [
+            {
+              "originalPosition": 89,
+              "body": "Empty is correct, and I don't think it needs air quotes. \"Consisting only of the root label\" is confusing since it introduces the concept of a root label. I think this is clearer without the change.",
+              "createdAt": "2025-06-18T06:51:01Z",
+              "updatedAt": "2025-06-18T06:51:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vHYxm",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "ableyjoe",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-18T06:53:12Z",
+          "updatedAt": "2025-06-18T06:53:12Z",
+          "comments": [
+            {
+              "originalPosition": 144,
+              "body": "what is \"active DNS data\"? Do we mean data obtained by active measurements as opposed to passive measurements?",
+              "createdAt": "2025-06-18T06:53:12Z",
+              "updatedAt": "2025-06-18T06:53:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vHZiM",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "ableyjoe",
+          "authorAssociation": "OWNER",
+          "state": "CHANGES_REQUESTED",
+          "body": "I added some in-line comments, perhaps you could check whether you agree with them and (if so) make some changes?",
+          "createdAt": "2025-06-18T06:54:29Z",
+          "updatedAt": "2025-06-18T06:54:29Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONORxZs6vIUri",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "peterthomassen",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-18T08:10:40Z",
+          "updatedAt": "2025-06-18T08:10:40Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Sure. My confusion is mainly about \"to which clients use\", because you can't \"use to something\".",
+              "createdAt": "2025-06-18T08:10:40Z",
+              "updatedAt": "2025-06-18T08:10:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vIVhd",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "peterthomassen",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-18T08:11:51Z",
+          "updatedAt": "2025-06-18T08:11:52Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "In my experience, if you put something in the MNAME that doesn't respond to queries, customer will complain because zonecheckers. The point I was trying to make is that it's good if there's a way to say \"I'm not putting anything here, because I have nothing to put\". (This would be true even without Dynamic Update existing.)\r\n\r\nBut, not feeling strongly.",
+              "createdAt": "2025-06-18T08:11:52Z",
+              "updatedAt": "2025-06-18T08:11:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vIXle",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "peterthomassen",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-18T08:14:43Z",
+          "updatedAt": "2025-06-18T08:14:43Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "For \"policy\", I think of a document, or at least an intentional decision. But it could be that one doesn't support it because the software doesn't support it (as is the case for deSEC).\r\n\r\n(The software really does, but we've not made a serious attempt to connect one of our public-facing nameservers with our authentication system. Perhaps you'd say this is policy, but I don't feel that's the right term. It's rather \"not implemented\".)\r\n\r\nAgain, not feeling strongly. -- We could say \"for a number of reasons\" instead of \"policy and other\". Wdyt?",
+              "createdAt": "2025-06-18T08:14:43Z",
+              "updatedAt": "2025-06-18T08:14:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vIYJz",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "peterthomassen",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-18T08:15:28Z",
+          "updatedAt": "2025-06-18T08:15:28Z",
+          "comments": [
+            {
+              "originalPosition": 89,
+              "body": "Empty is not empty because it contains an octet. I have not seen this word used except in your documents. (For example, \"MX .\" doesn't use it.) It should be defined somewhere.",
+              "createdAt": "2025-06-18T08:15:28Z",
+              "updatedAt": "2025-06-18T08:15:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vIYgp",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "peterthomassen",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-18T08:15:58Z",
+          "updatedAt": "2025-06-18T08:15:58Z",
+          "comments": [
+            {
+              "originalPosition": 144,
+              "body": "Idk, you gotta ask Raffaele! :) @raffysommy\r\n",
+              "createdAt": "2025-06-18T08:15:58Z",
+              "updatedAt": "2025-06-18T08:15:58Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
