@@ -24,12 +24,12 @@ clients at all.
 avoid naming a host capable of Dynamic Updates, and signal to clients
 that a particular zone does not support Dynamic Update. 
     ' name="description">
-<meta content="xml2rfc 3.28.1" name="generator">
+<meta content="xml2rfc 3.29.0" name="generator">
 <meta content="dns" name="keyword">
 <meta content="mname" name="keyword">
 <meta content="draft-jabley-dnsop-missing-mname-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.1
+  xml2rfc 3.29.0
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -1064,7 +1064,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Abley &amp; Thomassen</td>
-<td class="center">Expires 19 December 2025</td>
+<td class="center">Expires 24 December 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1080,12 +1080,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc2136" class="eref">2136</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-06-17" class="published">17 June 2025</time>
+<time datetime="2025-06-22" class="published">22 June 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-12-19">19 December 2025</time></dd>
+<dd class="expires"><time datetime="2025-12-24">24 December 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1152,7 +1152,7 @@ that a particular zone does not support Dynamic Update.<a href="#section-abstrac
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 19 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 24 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1436,7 +1436,7 @@ might result in unwanted traffic being sent to root servers, e.g.,
 for clients that might interpret the <code>MNAME</code> as a host name and try
 to use the DNS to find addresses for it.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">Use of an empty <code>SOA.MNAME</code> is not new; cursory analysis of active
-DNS data demonstrates a robust volume of DNS responses that include
+DNS measurement data demonstrates a robust volume of DNS responses that include
 an empty <code>SOA.MNAME</code> for zones across a variety of top-level domains.
 No negative consequences of this traffic have been identified.  See
 <a href="#quantify" class="auto internal xref">Appendix A</a> for discussion.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
@@ -1534,7 +1534,7 @@ messages to nameservers that are not configured to receive them.<a href="#sectio
       <h2 id="name-empty-soamname-observed-in-">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-empty-soamname-observed-in-" class="section-name selfRef">Empty SOA.MNAME Observed in SOA Responses</a>
       </h2>
-<p id="appendix-A-1">A quick check using a variety of active DNS datasets relating to
+<p id="appendix-A-1">A quick check using a variety of active DNS measurement datasets relating to
 observed traffic on 2024-10-30 reveals examples of responses with
 empty <code>SOA.MNAME</code> in the real world, as illustrated in <a href="#realworld" class="auto internal xref">Table 1</a>.
 This perhaps suggests that a study with normalisation and a longer
@@ -1587,7 +1587,7 @@ of the people have concerned have long since faded from memory,
 but the authors thank them generally and anonymously, regardless.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-2">Raffaele Sommese helped quantify existing observed use of SOA
 responses with empty <code>MNAME</code> fields in a variety of active DNS
-datasets, as summarised briefly in <a href="#quantify" class="auto internal xref">Appendix A</a>.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+measurement datasets, as summarised briefly in <a href="#quantify" class="auto internal xref">Appendix A</a>.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">

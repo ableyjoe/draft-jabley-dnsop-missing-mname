@@ -6,7 +6,7 @@ Domain Name System Operations                                   J. Abley
 Internet-Draft                                                Cloudflare
 Updates: 2136 (if approved)                                 P. Thomassen
 Intended status: Standards Track       deSEC, Secure Systems Engineering
-Expires: 19 December 2025                                   17 June 2025
+Expires: 24 December 2025                                   22 June 2025
 
 
        Indicating Non-Availability of Dynamic Updates in the DNS
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 December 2025.
+   This Internet-Draft will expire on 24 December 2025.
 
 Copyright Notice
 
@@ -248,10 +248,10 @@ Table of Contents
    use the DNS to find addresses for it.
 
    Use of an empty SOA.MNAME is not new; cursory analysis of active DNS
-   data demonstrates a robust volume of DNS responses that include an
-   empty SOA.MNAME for zones across a variety of top-level domains.  No
-   negative consequences of this traffic have been identified.  See
-   Appendix A for discussion.
+   measurement data demonstrates a robust volume of DNS responses that
+   include an empty SOA.MNAME for zones across a variety of top-level
+   domains.  No negative consequences of this traffic have been
+   identified.  See Appendix A for discussion.
 
 6.  Updates to RFC 2136
 
@@ -313,11 +313,12 @@ Table of Contents
 
 Appendix A.  Empty SOA.MNAME Observed in SOA Responses
 
-   A quick check using a variety of active DNS datasets relating to
-   observed traffic on 2024-10-30 reveals examples of responses with
-   empty SOA.MNAME in the real world, as illustrated in Table 1.  This
-   perhaps suggests that a study with normalisation and a longer time
-   base might be useful to include in a future revision of this draft.
+   A quick check using a variety of active DNS measurement datasets
+   relating to observed traffic on 2024-10-30 reveals examples of
+   responses with empty SOA.MNAME in the real world, as illustrated in
+   Table 1.  This perhaps suggests that a study with normalisation and a
+   longer time base might be useful to include in a future revision of
+   this draft.
 
                          +=============+=========+
                          | source      | counter |
@@ -349,7 +350,7 @@ Acknowledgments
 
    Raffaele Sommese helped quantify existing observed use of SOA
    responses with empty MNAME fields in a variety of active DNS
-   datasets, as summarised briefly in Appendix A.
+   measurement datasets, as summarised briefly in Appendix A.
 
 Authors' Addresses
 
