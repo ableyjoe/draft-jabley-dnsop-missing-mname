@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-22T01:46:22.623171+00:00",
+  "timestamp": "2025-06-24T01:39:35.556133+00:00",
   "repo": "ableyjoe/draft-jabley-dnsop-missing-mname",
   "labels": [
     {
@@ -63,18 +63,26 @@
       "labels": [],
       "body": "Mostly clarity, typos etc.",
       "createdAt": "2025-06-17T19:55:51Z",
-      "updatedAt": "2025-06-18T08:15:58Z",
+      "updatedAt": "2025-06-22T19:16:11Z",
       "baseRepository": "ableyjoe/draft-jabley-dnsop-missing-mname",
       "baseRefName": "main",
       "baseRefOid": "d4a34b7936d9686cc7cbee718d22785ebcc5f9d2",
       "headRepository": "ableyjoe/draft-jabley-dnsop-missing-mname",
       "headRefName": "20250617_peter",
-      "headRefOid": "91b351a0fc24582769d3eba379b568c45ff929e0",
+      "headRefOid": "1a8b38636b67365aaf2b364626fa78db5ba01733",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "peterthomassen",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I added some in-line comments, perhaps you could check whether you agree with them and (if so) make some changes?\r\n\r\nI added responses to your comment to clarify my intent; maybe there's wording that addresses my points while being consistent with yours. :) So, any reactions appreciated.",
+          "createdAt": "2025-06-22T19:16:11Z",
+          "updatedAt": "2025-06-22T19:16:11Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDONORxZs6vHUiI",
@@ -326,6 +334,46 @@
               "body": "Idk, you gotta ask Raffaele! :) @raffysommy\r\n",
               "createdAt": "2025-06-18T08:15:58Z",
               "updatedAt": "2025-06-18T08:15:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vuzEn",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "raffysommy",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-22T19:10:38Z",
+          "updatedAt": "2025-06-22T19:10:38Z",
+          "comments": [
+            {
+              "originalPosition": 144,
+              "body": "Yes, Joe. Data from OpenINTEL are from daily active DNS measurements that we run :)",
+              "createdAt": "2025-06-22T19:10:38Z",
+              "updatedAt": "2025-06-22T19:10:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONORxZs6vuzRC",
+          "commit": {
+            "abbreviatedOid": "91b351a"
+          },
+          "author": "peterthomassen",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-22T19:14:35Z",
+          "updatedAt": "2025-06-22T19:14:35Z",
+          "comments": [
+            {
+              "originalPosition": 144,
+              "body": "replaced \"active DNS data\" with \"active DNS measurement data\"",
+              "createdAt": "2025-06-22T19:14:35Z",
+              "updatedAt": "2025-06-22T19:14:35Z"
             }
           ]
         }
